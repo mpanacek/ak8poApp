@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SecretaryApp.EntityFramework
 {
-    class SecretaryAppDbContext : DbContext
+    public class SecretaryAppDbContext : DbContext
     {
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Group> Groups { get; set; }

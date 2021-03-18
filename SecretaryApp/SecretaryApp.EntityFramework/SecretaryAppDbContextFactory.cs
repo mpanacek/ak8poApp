@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace SecretaryApp.EntityFramework
 {
-    class SecretaryAppDbContextFactory : IDesignTimeDbContextFactory<SecretaryAppDbContext>
+    public class SecretaryAppDbContextFactory : IDesignTimeDbContextFactory<SecretaryAppDbContext>
     {
-        public SecretaryAppDbContext CreateDbContext(string[] args)
+        public SecretaryAppDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<SecretaryAppDbContext>();
             options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = SecretaryApp; Trusted_Connection = True;");
