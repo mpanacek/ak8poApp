@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SecretaryApp.WPF.State.Navigators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace SecretaryApp.WPF.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        public INavigator Navigator { get; set; } = new Navigator();
     }
 }
