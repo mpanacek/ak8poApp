@@ -22,7 +22,7 @@ namespace SecretaryApp.WPF.State.Navigators
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentMainViewModelCommand(this);
 
      
     }

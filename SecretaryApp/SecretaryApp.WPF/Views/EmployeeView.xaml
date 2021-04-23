@@ -4,9 +4,54 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SecretaryApp.WPF.Views"
-             mc:Ignorable="d" 
+             xmlns:viewModels="clr-namespace:SecretaryApp.WPF.ViewModels"
+             xmlns:c="clr-namespace:SecretaryApp.WPF.Commands"
+             xmlns:controls="clr-namespace:SecretaryApp.WPF.Controls"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
+    
+    
     <Grid>
-        <TextBlock Text="Zamestnanci"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+      
+
+
+        <!--<TextBlock Grid.Row="0" Text="Zamestnanci" />-->
+
+        <ListView Grid.Row="1">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Employees}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="260"/>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock  Text="{Binding FullName}" />
+                            <TextBlock Grid.Column="1" Text="{Binding WorkEmail}" />
+                            <TextBlock Grid.Column="2" Text="{Binding WorkPhone}" />
+                            <Button Grid.Column="3"  Content="Details"/>
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ListView>
+
+        <!--<Button Grid.Row="2" Content="Pridaj Zamestnanca" Command="{Binding UpdateCurrentSubViewModelCommand}" CommandParameter="{x:Static nav:SubViewType.AddEmployee}"/>-->
+        <!--<Button Grid.Row="2" Content="Add New Employee" Command="{Binding AddEmployeeCommand}"/>-->
     </Grid>
 </UserControl>

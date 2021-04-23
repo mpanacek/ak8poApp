@@ -1,4 +1,6 @@
-﻿using SecretaryApp.WPF.State.Navigators;
+﻿using SecretaryApp.Domain.Models;
+using SecretaryApp.EntityFramework.Services;
+using SecretaryApp.WPF.State.Navigators;
 using SecretaryApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,13 +11,13 @@ using System.Windows.Input;
 
 namespace SecretaryApp.WPF.Commands
 {
-    class UpdateCurrentViewModelCommand : ICommand
+    public class UpdateCurrentMainViewModelCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 
         private INavigator _navigator;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator)
+        public UpdateCurrentMainViewModelCommand(INavigator navigator)
         {
             _navigator = navigator;
         }
@@ -34,7 +36,7 @@ namespace SecretaryApp.WPF.Commands
                 switch(viewType)
                 {
                     case ViewType.Employee:
-                        _navigator.CurrentViewModel = new EmployeeViewModel();
+                        _navigator.CurrentViewModel = new EmployeeViewModel(new EntityFramework.SecretaryAppDbContextFactory());
                         break;
 
                     case ViewType.Subject:
@@ -44,7 +46,6 @@ namespace SecretaryApp.WPF.Commands
                     case ViewType.Group:
                         _navigator.CurrentViewModel = new GroupViewModel();
                         break;
-
                     default:
                         break;
                 }
