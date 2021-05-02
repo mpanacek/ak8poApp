@@ -45,13 +45,13 @@ namespace SecretaryApp.WPF.Views.Subjects
             if(shortcutTextBox.Text != "" && nameTextBox.Text != "" && numberOfCreditsTextBox.Text != "" && numberOfWeeksTextBox.Text != "" && hoursOfLecturesTextBox.Text != ""
                 && hoursOfExcercisesTextBox.Text != "" && classSizeTextBox.Text != "")
             {
-                //foreach (var subjectItem in Subjects)
-                //{
-                //    if (subjectItem.Shortcut == shortcutTextBox.Text)
-                //        break;
-                //}
+                foreach (var subjectItem in Subjects)
+                {
+                    if (subjectItem.Shortcut == shortcutTextBox.Text)
+                        break;
+                }
 
-                //subject.Shortcut = shortcutTextBox.Text;
+                subject.Shortcut = shortcutTextBox.Text;
                 subject.Name = nameTextBox.Text;
                 subject.NumberOfCredits = int.Parse(numberOfCreditsTextBox.Text);
                 subject.NumberOfWeeks = int.Parse(numberOfWeeksTextBox.Text);

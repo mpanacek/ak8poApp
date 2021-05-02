@@ -10,8 +10,8 @@ using SecretaryApp.EntityFramework;
 namespace SecretaryApp.EntityFramework.Migrations
 {
     [DbContext(typeof(SecretaryAppDbContext))]
-    [Migration("20210502081427_ShortcutColumnRemoval")]
-    partial class ShortcutColumnRemoval
+    [Migration("20210502083654_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,6 +134,9 @@ namespace SecretaryApp.EntityFramework.Migrations
 
                     b.Property<int>("NumberOfWeeks")
                         .HasColumnType("int");
+
+                    b.Property<string>("Shortcut")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("WayOfCompletion")
                         .HasColumnType("int");

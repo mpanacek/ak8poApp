@@ -2,7 +2,7 @@
 
 namespace SecretaryApp.EntityFramework.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,9 @@ namespace SecretaryApp.EntityFramework.Migrations
                 name: "Subjects",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Shortcut = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumberOfCredits = table.Column<int>(type: "int", nullable: false),
                     NumberOfWeeks = table.Column<int>(type: "int", nullable: false),
@@ -78,7 +80,7 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SubjectId = table.Column<int>(type: "int", nullable: true),
                     Shortcut = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Class = table.Column<int>(type: "int", nullable: false),
@@ -106,7 +108,7 @@ namespace SecretaryApp.EntityFramework.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
-                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SubjectId = table.Column<int>(type: "int", nullable: true),
                     LectureType = table.Column<int>(type: "int", nullable: false),
                     NumberOfStudents = table.Column<int>(type: "int", nullable: false),
                     NumberOfHours = table.Column<int>(type: "int", nullable: false),
@@ -136,7 +138,7 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    SubjectId = table.Column<int>(type: "int", nullable: true),
                     GroupId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

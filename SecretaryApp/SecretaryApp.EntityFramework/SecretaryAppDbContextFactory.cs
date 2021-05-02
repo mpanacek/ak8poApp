@@ -8,7 +8,7 @@ namespace SecretaryApp.EntityFramework
         public SecretaryAppDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<SecretaryAppDbContext>();
-            options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = SecretaryApp; Trusted_Connection = True;");
+            options.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = SecretaryAppDb; Trusted_Connection = True;");
 
             return new SecretaryAppDbContext(options.Options);
         }

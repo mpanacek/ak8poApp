@@ -33,7 +33,7 @@
                             <TextBlock  Text="{Binding Name}" />
                             <TextBlock Grid.Column="1" Text="{Binding Language}" />
                             <TextBlock Grid.Column="2" Text="{Binding WayOfCompletion}" />
-                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenEmployeeDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenSubjectDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
 
                         </Grid>
                     </DataTemplate>
