@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using SecretaryApp.Domain.Models;
+﻿using SecretaryApp.Domain.Models;
 using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
