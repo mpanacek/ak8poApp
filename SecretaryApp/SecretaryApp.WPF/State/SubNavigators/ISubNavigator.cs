@@ -6,17 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace SecretaryApp.WPF.State.Navigators
+namespace SecretaryApp.WPF.State.SubNavigators
 {
     public enum ViewType
     {
-        Employee,
-        Subject,
-        Group,
         AddNewEmployee
     }
 
-    public interface INavigator
+    public interface ISubNavigator
     {
         public ViewModelBase CurrentViewModel { get; set; }
         ICommand UpdateCurrentViewModelCommand { get; }

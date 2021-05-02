@@ -40,12 +40,17 @@ namespace SecretaryApp.WPF.Commands
                         break;
 
                     case ViewType.Subject:
-                        _navigator.CurrentViewModel = new SubjectViewModel();
+                        _navigator.CurrentViewModel = new SubjectViewModel(new EntityFramework.SecretaryAppDbContextFactory());
                         break;
 
                     case ViewType.Group:
                         _navigator.CurrentViewModel = new GroupViewModel();
                         break;
+
+                    case ViewType.AddNewEmployee:
+                        _navigator.CurrentViewModel = new AddNewEmployeeViewModel();
+                        break;
+
                     default:
                         break;
                 }

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SecretaryApp.WPF.Views
+namespace SecretaryApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for AddNewEmployeeView.xaml
+    /// Interaction logic for SubNavigation.xaml
     /// </summary>
-    public partial class AddNewEmployeeView : UserControl
+    public partial class SubNavigation : UserControl
     {
-        public AddNewEmployeeView()
+        public SubNavigation()
         {
             InitializeComponent();
         }

@@ -9,7 +9,7 @@ namespace SecretaryApp.Domain.Models
 
     public class Subject : DomainObject
     {
-        public new string Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int NumberOfCredits { get; set; }
         public int NumberOfWeeks { get; set; }

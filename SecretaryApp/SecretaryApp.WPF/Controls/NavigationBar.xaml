@@ -21,12 +21,14 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
             <RadioButton Grid.Column="0" Content="Úväzkový List"/>
             <RadioButton Grid.Column="1" Content="Zamestnanci" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Employee}"/>
             <RadioButton Grid.Column="2" Content="Predmety" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Subject}"/>
             <RadioButton Grid.Column="3" Content="Skupiny" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Group}"/>
+            <RadioButton Grid.Column="4" Content="New Emp" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.AddNewEmployee}"/>
 
         </Grid>
 
