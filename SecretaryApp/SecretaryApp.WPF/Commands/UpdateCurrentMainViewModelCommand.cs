@@ -1,12 +1,6 @@
-﻿using SecretaryApp.Domain.Models;
-using SecretaryApp.EntityFramework.Services;
-using SecretaryApp.WPF.State.Navigators;
+﻿using SecretaryApp.WPF.State.Navigators;
 using SecretaryApp.WPF.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SecretaryApp.WPF.Commands
@@ -44,7 +38,7 @@ namespace SecretaryApp.WPF.Commands
                         break;
 
                     case ViewType.Group:
-                        _navigator.CurrentViewModel = new GroupViewModel();
+                        _navigator.CurrentViewModel = new GroupViewModel(new EntityFramework.SecretaryAppDbContextFactory());
                         break;
 
                     case ViewType.AddNewEmployee:

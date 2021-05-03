@@ -7,16 +7,6 @@
         mc:Ignorable="d"
         Title="AddNewSubjectView" Height="450" Width="800">
 
-
-    <Window.Resources>
-        <!--<ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
-                            ObjectType="{x:Type System:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="S"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>-->
-    </Window.Resources>
-
     <Grid Margin="-3,4,3,-4">
         <Button x:Name="backButton" Content="Späť" HorizontalAlignment="Left" Margin="505,355,0,0" VerticalAlignment="Top" Height="35" Width="85" Click="backButton_Click"/>
         <Button x:Name="saveButton" Content="Uložiť" HorizontalAlignment="Left" Margin="646,355,0,0" VerticalAlignment="Top" Height="35" Width="85" Click="saveButton_Click" />
