@@ -13,8 +13,6 @@
         <Label x:Name="HeadingDataLabel" Content="Pridaj nový predmet" HorizontalAlignment="Left" Margin="24,22,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Book Antiqua" FontStyle="Italic"/>
         <Label Content="Skratka" HorizontalAlignment="Left" Margin="24,101,0,0" VerticalAlignment="Top"/>
         <Label x:Name="shortcutDataLabel" HorizontalAlignment="Left" Margin="140,105,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Názov" HorizontalAlignment="Left" Margin="24,142,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="nameName" HorizontalAlignment="Left" Margin="140,146,0,0"  VerticalAlignment="Top" Width="120"/>
         <Label Content="Počet Kreditov" HorizontalAlignment="Left" Margin="24,187,0,0" VerticalAlignment="Top"/>
         <Label x:Name="numberOfCreditsDataLabel" HorizontalAlignment="Left" Margin="140,191,0,0"  VerticalAlignment="Top" Width="120"/>
         <Label Content="Hodiny prednášok" HorizontalAlignment="Left" Margin="24,230,0,0" VerticalAlignment="Top"/>
@@ -24,13 +22,40 @@
         <Label Content="Veľkosť triedy" HorizontalAlignment="Left" Margin="24,313,0,0" VerticalAlignment="Top"/>
         <Label x:Name="classSizeDataLabel" HorizontalAlignment="Left" Margin="140,317,0,0" VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="Spôsob ukončenia" HorizontalAlignment="Left" Margin="354,142,0,0" VerticalAlignment="Top"/>
-        <Label  x:Name="endingDataLabel" HorizontalAlignment="Left" Margin="505,146,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Jazyk" HorizontalAlignment="Left" Margin="354,187,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="languageDataLabel" HorizontalAlignment="Left" Margin="505,191,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Spôsob ukončenia" HorizontalAlignment="Left" Margin="353,96,0,0" VerticalAlignment="Top"/>
+        <Label  x:Name="endingDataLabel" HorizontalAlignment="Left" Margin="504,100,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Jazyk" HorizontalAlignment="Left" Margin="353,141,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="languageDataLabel" HorizontalAlignment="Left" Margin="504,145,0,0" VerticalAlignment="Top" Width="120"/>
 
-        <Label Content="Počet týždňov" HorizontalAlignment="Left" Margin="354,101,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="numberOfWeeksDataLabel" HorizontalAlignment="Left" Margin="505,105,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Počet týždňov" HorizontalAlignment="Left" Margin="22,142,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="numberOfWeeksDataLabel" HorizontalAlignment="Left" Margin="140,145,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Zoznam skupín" HorizontalAlignment="Left" Margin="353,178,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="addGroup" Content="Pridaj skupinu" HorizontalAlignment="Left" Margin="504,181,0,0" VerticalAlignment="Top" Click="addGroup_Click"/>
+        <!--Margin="355,217,196,126"-->
+        <ListView Margin="355,217,196,126" x:Name="GroupsListView">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding GroupsAssignedToSubject}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="260"/>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
+                            <TextBlock  Text="{Binding Name}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Class}" />
+                            <TextBlock Grid.Column="2" Text="{Binding NumberOfStudents}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ListView>
     </Grid>
 </Window>

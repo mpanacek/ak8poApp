@@ -146,20 +146,16 @@ namespace SecretaryApp.EntityFramework.Migrations
 
             modelBuilder.Entity("SecretaryApp.Domain.Models.SubjectGroups", b =>
                 {
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
+                    b.HasKey("GroupId", "SubjectId");
 
                     b.HasIndex("SubjectId");
 
@@ -264,11 +260,15 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
                         .WithMany("SubjectGroups")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Group");
 

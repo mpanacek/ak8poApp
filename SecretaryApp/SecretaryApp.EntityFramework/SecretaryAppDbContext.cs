@@ -20,6 +20,9 @@ namespace SecretaryApp.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SubjectGroups>()
+                .HasKey(c => new { c.GroupId, c.SubjectId });
         }
 
     }

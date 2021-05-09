@@ -2,7 +2,9 @@
 using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 
 namespace SecretaryApp.WPF.Views.Subjects
@@ -14,7 +16,8 @@ namespace SecretaryApp.WPF.Views.Subjects
     {
         public IDataService<Subject> _subjectService { get; set; }
         public ObservableCollection<Subject> Subjects { get; set; }
-
+        public ObservableCollection<Group> GroupsAssignedToSubject { get; set; }
+        public List<SubjectGroups>? SubjectGroupsList { get; private set; }
         public Subject SubjectToDisplay { get; set; }
 
         public SubjectDetailView(Subject subject, SecretaryAppDbContextFactory _context, ObservableCollection<Subject> subjects)
@@ -23,12 +26,20 @@ namespace SecretaryApp.WPF.Views.Subjects
 
             _subjectService = new GenericDataService<Subject>(_context);
             SubjectToDisplay = subject;
+            SubjectGroupsList = subject.SubjectGroups?.ToList();
+
+            if(SubjectGroupsList != null)
+            {
+                foreach (var subjectGroup in SubjectGroupsList)
+                {
+                    GroupsAssignedToSubject.Add(subjectGroup.Group);
+                }
+            }
+            
 
             Subjects = subjects;
-
             HeadingDataLabel.Content = SubjectToDisplay.Name;
             shortcutDataLabel.Content = SubjectToDisplay.Shortcut;
-            nameName.Content = SubjectToDisplay.Name;
             numberOfCreditsDataLabel.Content = SubjectToDisplay.NumberOfCredits;
             numberOfWeeksDataLabel.Content = SubjectToDisplay.NumberOfWeeks;
             hoursOfLecturesDataLabel.Content = SubjectToDisplay.HoursOfLectures;
@@ -49,6 +60,13 @@ namespace SecretaryApp.WPF.Views.Subjects
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void addGroup_Click(object sender, RoutedEventArgs e)
+        {
+            AddGroupToSubjectView addGroupToSubjectView = new AddGroupToSubjectView();
+
+            addGroupToSubjectView.Show();
         }
     }
 }

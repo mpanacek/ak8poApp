@@ -2,7 +2,7 @@
 
 namespace SecretaryApp.EntityFramework.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -136,37 +136,31 @@ namespace SecretaryApp.EntityFramework.Migrations
                 name: "SubjectGroups",
                 columns: table => new
                 {
+                    SubjectId = table.Column<int>(type: "int", nullable: false),
+                    GroupId = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SubjectId = table.Column<int>(type: "int", nullable: true),
-                    GroupId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectGroups", x => x.Id);
+                    table.PrimaryKey("PK_SubjectGroups", x => new { x.GroupId, x.SubjectId });
                     table.ForeignKey(
                         name: "FK_SubjectGroups_Groups_GroupId",
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SubjectGroups_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_SubjectId",
                 table: "Groups",
                 column: "SubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubjectGroups_GroupId",
-                table: "SubjectGroups",
-                column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubjectGroups_SubjectId",

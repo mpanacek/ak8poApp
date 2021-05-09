@@ -10,8 +10,8 @@ using SecretaryApp.EntityFramework;
 namespace SecretaryApp.EntityFramework.Migrations
 {
     [DbContext(typeof(SecretaryAppDbContext))]
-    [Migration("20210502083654_initial")]
-    partial class initial
+    [Migration("20210509065821_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -148,20 +148,16 @@ namespace SecretaryApp.EntityFramework.Migrations
 
             modelBuilder.Entity("SecretaryApp.Domain.Models.SubjectGroups", b =>
                 {
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
+                    b.HasKey("GroupId", "SubjectId");
 
                     b.HasIndex("SubjectId");
 
@@ -266,11 +262,15 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("GroupId");
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
                         .WithMany("SubjectGroups")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Group");
 
