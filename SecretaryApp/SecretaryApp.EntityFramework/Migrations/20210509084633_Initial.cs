@@ -2,7 +2,7 @@
 
 namespace SecretaryApp.EntityFramework.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -132,39 +132,9 @@ namespace SecretaryApp.EntityFramework.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "SubjectGroups",
-                columns: table => new
-                {
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SubjectGroups", x => new { x.GroupId, x.SubjectId });
-                    table.ForeignKey(
-                        name: "FK_SubjectGroups_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SubjectGroups_Subjects_SubjectId",
-                        column: x => x.SubjectId,
-                        principalTable: "Subjects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Groups_SubjectId",
                 table: "Groups",
-                column: "SubjectId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubjectGroups_SubjectId",
-                table: "SubjectGroups",
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
@@ -181,16 +151,13 @@ namespace SecretaryApp.EntityFramework.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SubjectGroups");
+                name: "Groups");
 
             migrationBuilder.DropTable(
                 name: "WeightsOfWorkPoints");
 
             migrationBuilder.DropTable(
                 name: "WorkLabels");
-
-            migrationBuilder.DropTable(
-                name: "Groups");
 
             migrationBuilder.DropTable(
                 name: "Employees");

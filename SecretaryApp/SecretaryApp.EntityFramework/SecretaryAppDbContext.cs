@@ -11,7 +11,7 @@ namespace SecretaryApp.EntityFramework
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Subject> Subjects { get; set; }
-        public DbSet<SubjectGroups> SubjectGroups { get; set; }
+      //  public DbSet<SubjectGroups> SubjectGroups { get; set; }
         public DbSet<WeightsOfWorkPoints> WeightsOfWorkPoints { get; set; }
         public DbSet<WorkLabel> WorkLabels { get; set; }
 
@@ -21,8 +21,8 @@ namespace SecretaryApp.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SubjectGroups>()
-                .HasKey(c => new { c.GroupId, c.SubjectId });
+            //modelBuilder.Entity<SubjectGroups>()
+            //    .HasKey(c => new { c.GroupId, c.SubjectId });
         }
 
     }

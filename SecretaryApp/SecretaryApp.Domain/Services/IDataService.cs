@@ -11,6 +11,8 @@ namespace SecretaryApp.Domain.Services
 
         Task<T> Create(T entity);
 
+        Task<T> Update(int id, T entity);
+
         Task<bool> Delete(int id);
     }
 }

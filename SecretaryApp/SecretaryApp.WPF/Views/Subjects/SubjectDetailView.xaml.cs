@@ -2,9 +2,8 @@
 using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.ComponentModel;
 using System.Windows;
 
 namespace SecretaryApp.WPF.Views.Subjects
@@ -12,30 +11,45 @@ namespace SecretaryApp.WPF.Views.Subjects
     /// <summary>
     /// Interaction logic for SubjectDetailView.xaml
     /// </summary>
-    public partial class SubjectDetailView : Window
+    public partial class SubjectDetailView : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private ObservableCollection<Group> groupsAssignedToSubject;
+        public ObservableCollection<Group> GroupsAssignedToSubject 
+        {
+            get 
+            { 
+                return groupsAssignedToSubject; 
+            }
+            set 
+            { 
+                groupsAssignedToSubject = value;
+                OnPropertyChanged(nameof(GroupsAssignedToSubject));
+            }
+        }
+
+
         public IDataService<Subject> _subjectService { get; set; }
         public ObservableCollection<Subject> Subjects { get; set; }
-        public ObservableCollection<Group> GroupsAssignedToSubject { get; set; }
-        public List<SubjectGroups>? SubjectGroupsList { get; private set; }
         public Subject SubjectToDisplay { get; set; }
 
         public SubjectDetailView(Subject subject, SecretaryAppDbContextFactory _context, ObservableCollection<Subject> subjects)
         {
+            DataContext = this;
             InitializeComponent();
 
-            _subjectService = new GenericDataService<Subject>(_context);
+            _subjectService = new SubjectDataService(_context, new GenericDataService<Subject>(_context));
             SubjectToDisplay = subject;
-            SubjectGroupsList = subject.SubjectGroups?.ToList();
 
-            if(SubjectGroupsList != null)
-            {
-                foreach (var subjectGroup in SubjectGroupsList)
-                {
-                    GroupsAssignedToSubject.Add(subjectGroup.Group);
-                }
-            }
-            
+            if (SubjectToDisplay.Groups != null)
+                GroupsAssignedToSubject = new ObservableCollection<Group>(SubjectToDisplay?.Groups);
+            else GroupsAssignedToSubject = new ObservableCollection<Group>();
 
             Subjects = subjects;
             HeadingDataLabel.Content = SubjectToDisplay.Name;
@@ -64,7 +78,7 @@ namespace SecretaryApp.WPF.Views.Subjects
 
         private void addGroup_Click(object sender, RoutedEventArgs e)
         {
-            AddGroupToSubjectView addGroupToSubjectView = new AddGroupToSubjectView();
+            AddGroupToSubjectView addGroupToSubjectView = new AddGroupToSubjectView(new SecretaryAppDbContextFactory(), SubjectToDisplay, GroupsAssignedToSubject);
 
             addGroupToSubjectView.Show();
         }

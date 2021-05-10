@@ -12,8 +12,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ListView" Grid.Row="1">
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding Employees}">
+        <ListView x:Name="ListView" Grid.Row="0">
+            <ItemsControl ItemsSource="{Binding Groups}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
@@ -26,19 +26,21 @@
                                 <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="260"/>
                                 <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock  Text="{Binding FullName}" />
-                            <TextBlock Grid.Column="1" Text="{Binding WorkEmail}" />
-                            <TextBlock Grid.Column="2" Text="{Binding WorkPhone}" />
-                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenEmployeeDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+                            <TextBlock Grid.Column="0"  Text="{Binding Name}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Class}" />
+                            <TextBlock Grid.Column="2" Text="{Binding NumberOfStudents}" />
+                            <TextBlock Grid.Column="3" Text="{Binding Semester}" />
+                            <Button x:Name="addgroupButton" Grid.Column="4" Content="Add" Command="{Binding DataContext.AddGroupTosubjectCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ListView>
-            
-        <Button Grid.Row="1" Content="Add Group"/>
+
+        <!--<Button x:Name="addGroupButton" Grid.Row="1" Click="addGroupButton_Click"/>-->
     </Grid>
 </Window>

@@ -58,5 +58,18 @@ namespace SecretaryApp.EntityFramework.Services
                 return entities;
             }
         }
+
+        public async Task<T> Update(int id, T entity)
+        {
+            using (SecretaryAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                entity.Id = id;
+
+                context.Set<T>().Update(entity);
+                await context.SaveChangesAsync();
+
+                return entity;
+            }
+        }
     }
 }

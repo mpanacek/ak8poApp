@@ -10,8 +10,8 @@ using SecretaryApp.EntityFramework;
 namespace SecretaryApp.EntityFramework.Migrations
 {
     [DbContext(typeof(SecretaryAppDbContext))]
-    [Migration("20210509065821_initialMigration")]
-    partial class initialMigration
+    [Migration("20210509084633_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -146,24 +146,6 @@ namespace SecretaryApp.EntityFramework.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("SecretaryApp.Domain.Models.SubjectGroups", b =>
-                {
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("GroupId", "SubjectId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("SubjectGroups");
-                });
-
             modelBuilder.Entity("SecretaryApp.Domain.Models.WeightsOfWorkPoints", b =>
                 {
                     b.Property<int>("Id")
@@ -252,27 +234,8 @@ namespace SecretaryApp.EntityFramework.Migrations
             modelBuilder.Entity("SecretaryApp.Domain.Models.Group", b =>
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
-                        .WithMany()
+                        .WithMany("Groups")
                         .HasForeignKey("SubjectId");
-
-                    b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("SecretaryApp.Domain.Models.SubjectGroups", b =>
-                {
-                    b.HasOne("SecretaryApp.Domain.Models.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
-                        .WithMany("SubjectGroups")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Group");
 
                     b.Navigation("Subject");
                 });
@@ -294,7 +257,7 @@ namespace SecretaryApp.EntityFramework.Migrations
 
             modelBuilder.Entity("SecretaryApp.Domain.Models.Subject", b =>
                 {
-                    b.Navigation("SubjectGroups");
+                    b.Navigation("Groups");
 
                     b.Navigation("WorkLabels");
                 });

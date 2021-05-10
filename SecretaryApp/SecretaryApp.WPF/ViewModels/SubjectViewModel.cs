@@ -33,7 +33,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public SubjectViewModel(SecretaryAppDbContextFactory _context)
         {
-            _subjectService = new GenericDataService<Subject>(_context);
+            _subjectService = new SubjectDataService(_context, new GenericDataService<Subject>(_context));
             AddSubjectCommand = new AddSubjectCommand(this);
             OpenSubjectDetailCommand = new OpenSubjectDetailCommand(this);
 

@@ -19,6 +19,6 @@ namespace SecretaryApp.Domain.Models
         public WayOfCompletion WayOfCompletion { get; set; }
         public Language Language { get; set; }
         public IEnumerable<WorkLabel> WorkLabels { get; set; }
-        public IEnumerable<SubjectGroups> SubjectGroups { get; set; }
+        public IEnumerable<Group> Groups { get; set; }
     }
 }
