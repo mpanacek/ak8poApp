@@ -4,7 +4,7 @@ namespace SecretaryApp.Domain.Models
 {
     public enum WayOfCompletion
     {
-        z, zk
+        Záúpčet, Skúška
     }
 
     public class Subject : DomainObject

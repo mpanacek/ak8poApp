@@ -2,7 +2,7 @@
 {
     public enum LectureType
     {
-        Lecture, Seminar, Excercise, Credit, ClassifiedCredit, Exam 
+        Prednáška, Cvičenie, Seminár, Zápočet, KlasifikovanýZápočetSkúška
     }
 
     public class WorkLabel : DomainObject
