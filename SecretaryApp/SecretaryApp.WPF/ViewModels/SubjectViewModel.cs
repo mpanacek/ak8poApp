@@ -3,7 +3,9 @@ using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
 using SecretaryApp.WPF.Commands.Subject;
+using SecretaryApp.WPF.Commands.Subjects;
 using SecretaryApp.WPF.Views.Subjects;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -15,6 +17,8 @@ namespace SecretaryApp.WPF.ViewModels
 
         public AddSubjectCommand AddSubjectCommand { get; set; }
         public OpenSubjectDetailCommand OpenSubjectDetailCommand { get; set; }
+        public EditSubjectCommand EditSubjectCommand { get; set; }
+
 
         private ObservableCollection<Subject> subjects;
 
@@ -31,11 +35,19 @@ namespace SecretaryApp.WPF.ViewModels
             }
         }
 
+        public void EditSubject(Subject subject)
+        {
+            EditSubjectView editSubjectView = new EditSubjectView(new SecretaryAppDbContextFactory(), subject);
+
+            editSubjectView.Show();
+        }
+
         public SubjectViewModel(SecretaryAppDbContextFactory _context)
         {
             _subjectService = new SubjectDataService(_context, new GenericDataService<Subject>(_context));
             AddSubjectCommand = new AddSubjectCommand(this);
             OpenSubjectDetailCommand = new OpenSubjectDetailCommand(this);
+            EditSubjectCommand = new EditSubjectCommand(this);
 
             LoadSubjects();
         }

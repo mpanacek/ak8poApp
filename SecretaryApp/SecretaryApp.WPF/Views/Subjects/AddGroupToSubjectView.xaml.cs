@@ -3,6 +3,7 @@ using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
 using SecretaryApp.WPF.Commands.Subject;
+using SecretaryApp.WPF.Logic;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -80,10 +81,12 @@ namespace SecretaryApp.WPF.Views.Subjects
 
             CurrentSubject.Groups.ToList().Add(selectedGroup);
 
+            WorkLabelAlgorithm.Instance.Algorithm(CurrentSubject, selectedGroup);
+
             Groups.Remove(selectedGroup);
+            SubjectGroups.Add(selectedGroup);
 
             _groupService.Update(selectedGroup.Id, selectedGroup);
-            _subjectService.Update(CurrentSubject.Id, CurrentSubject);
         }
     }
 }

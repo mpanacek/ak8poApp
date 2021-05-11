@@ -51,12 +51,12 @@ namespace SecretaryApp.WPF.Views.Subjects
 
                 subject.WayOfCompletion = (WayOfCompletion)endingComboBox.SelectedItem;
                 subject.Language = (Language)languageComboBox.SelectedItem;
+
+                _subjectService.Create(subject);
+                Subjects.Add(subject);
+
+                Close();
             }
-
-            _subjectService.Create(subject);
-            Subjects.Add(subject);
-
-            Close();
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
