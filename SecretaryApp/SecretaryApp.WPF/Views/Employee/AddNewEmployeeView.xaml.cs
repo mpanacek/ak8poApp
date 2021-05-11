@@ -68,7 +68,7 @@ namespace SecretaryApp.WPF.Views
             {
                 employee.Name = nameTextBox.Text.ToString();
                 employee.Surname = surnameTextBox.Text.ToString();
-                employee.FullName = employee.Name + employee.Surname;
+                employee.FullName = employee.Name + " " + employee.Surname;
                 employee.WorkEmail = workMailTextBox.Text.ToString();
                 employee.PersonalEmail = privateMailTextBox.Text.ToString();
                 employee.WorkPhone = workPhoneTextBox.Text.ToString();

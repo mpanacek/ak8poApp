@@ -2,6 +2,7 @@
 using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
+using SecretaryApp.WPF.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,21 @@ namespace SecretaryApp.WPF.ViewModels
     {
         private IDataService<Employee> _employeeService { get; set; }
         private IDataService<WorkLabel> _worklabelDataService { get; set; }
+
+        public AddWorkLabelToEmployeeCommand AddWorkLabelToEmployeeCommand { get; set; }
+
+        private Employee selectedEmployee;
+
+        public Employee SelectedEmployee
+        {
+            get { return selectedEmployee; }
+            set 
+            { 
+                selectedEmployee = value;
+
+
+            }
+        }
 
         private ObservableCollection<WorkLabel> workLabels;
 
@@ -50,6 +66,7 @@ namespace SecretaryApp.WPF.ViewModels
         {
             _employeeService = new GenericDataService<Employee>(_context);
             _worklabelDataService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
+            AddWorkLabelToEmployeeCommand = new AddWorkLabelToEmployeeCommand(this);
             LoadData();
         }
 
@@ -60,6 +77,13 @@ namespace SecretaryApp.WPF.ViewModels
 
             IEnumerable<WorkLabel> workLabels = await _worklabelDataService.GetAll();
             WorkLabels = new ObservableCollection<WorkLabel>(workLabels.Where(w => w.Employee == null));
+        }
+
+        public void SelectedWorkLabelToEmployee(WorkLabel label)
+        {
+            label.Employee = selectedEmployee;
+            WorkLabels.Remove(label);
+            _worklabelDataService.Update(label.Id, label);
         }
     }
 }

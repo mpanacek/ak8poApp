@@ -25,7 +25,9 @@
                 <views:SubjectView/>
             </DataTemplate>
 
-            
+            <DataTemplate DataType="{x:Type viewModels:BundleListViewModel}">
+                <views:BundleListView/>
+            </DataTemplate>
         </ResourceDictionary> 
         
     </Application.Resources>
