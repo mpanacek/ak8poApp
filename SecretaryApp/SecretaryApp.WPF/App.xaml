@@ -25,10 +25,7 @@
                 <views:SubjectView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModels:AddNewEmployeeViewModel}">
-                <views:AddNewEmployeeView/>
-            </DataTemplate>
-
+            
         </ResourceDictionary> 
         
     </Application.Resources>

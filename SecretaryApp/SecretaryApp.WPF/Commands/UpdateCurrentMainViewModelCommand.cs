@@ -41,8 +41,8 @@ namespace SecretaryApp.WPF.Commands
                         _navigator.CurrentViewModel = new GroupViewModel(new EntityFramework.SecretaryAppDbContextFactory());
                         break;
 
-                    case ViewType.AddNewEmployee:
-                        _navigator.CurrentViewModel = new AddNewEmployeeViewModel();
+                    case ViewType.BundleList:
+                        _navigator.CurrentViewModel = new BundleListViewModel(new EntityFramework.SecretaryAppDbContextFactory());
                         break;
 
                     default:

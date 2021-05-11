@@ -13,7 +13,7 @@ namespace SecretaryApp.WPF.State.Navigators
         Employee,
         Subject,
         Group,
-        AddNewEmployee
+        BundleList
     }
 
     public interface INavigator
