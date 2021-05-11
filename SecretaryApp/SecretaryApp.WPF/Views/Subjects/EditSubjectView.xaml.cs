@@ -56,8 +56,13 @@ namespace SecretaryApp.WPF.Views.Subjects
                 SubjectToEdit.NumberOfWeeks = int.Parse(numberOfWeeksTextBox.Text);
                 SubjectToEdit.HoursOfLectures = int.Parse(hoursOfLecturesTextBox.Text);
                 SubjectToEdit.HoursOfExcercises = int.Parse(hoursOfExcercisesTextBox.Text);
-                SubjectToEdit.ClassSize = int.Parse(classSizeTextBox.Text);
 
+                if(SubjectToEdit.ClassSize != int.Parse(classSizeTextBox.Text))
+                {
+                    //recalculate number of students in the work labels
+                }
+
+                SubjectToEdit.ClassSize = int.Parse(classSizeTextBox.Text);
                 SubjectToEdit.WayOfCompletion = (WayOfCompletion)endingComboBox.SelectedItem;
                 SubjectToEdit.Language = (Language)languageComboBox.SelectedItem;
 

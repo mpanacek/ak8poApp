@@ -4,6 +4,7 @@ using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
 using SecretaryApp.WPF.Commands.Groups;
 using SecretaryApp.WPF.Views.Groups;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -15,7 +16,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public AddGroupCommand AddGroupCommand { get; set; }
         public OpenGroupDetailCommand OpenGroupDetailCommand { get; set; }
-
+        public OpenGroupViewCommand OpenGroupViewEditCommand { get; set; }
 
         private ObservableCollection<Group> groups;
 
@@ -29,11 +30,18 @@ namespace SecretaryApp.WPF.ViewModels
             }
         }
 
+        internal void OpenEditView(Group parameter)
+        {
+            EditGroupView editGroupView = new EditGroupView(new SecretaryAppDbContextFactory(), parameter);
+            editGroupView.Show();
+        }
+
         public GroupViewModel(SecretaryAppDbContextFactory _context)
         {
-            _groupService = new GenericDataService<Group>(_context);
+            _groupService = new GroupDataService(_context, new GenericDataService<Group>(_context));
             AddGroupCommand = new AddGroupCommand(this);
             OpenGroupDetailCommand = new OpenGroupDetailCommand(this);
+            OpenGroupViewEditCommand = new OpenGroupViewCommand(this);
 
             LoadGroups();
         }
