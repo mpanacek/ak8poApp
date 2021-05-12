@@ -45,12 +45,13 @@ namespace SecretaryApp.WPF.Views.Employee
             privatePhoneDataLabel.Content = EmployeeToDisplay.PersonalPhone;
             privatePhoneDataLabel.Content = EmployeeToDisplay.PersonalPhone;
             doktorantCheckBox.IsChecked = EmployeeToDisplay.DoctoralStudent;
-            workPhoneDataLabel.Content = EmployeeToDisplay.WorkPoints;
+            workPhoneDataLabel.Content = EmployeeToDisplay.WorkPhone;
             workPointsNoEngDataLabel.Content = EmployeeToDisplay.WorkPoints_NoEng;
+            workPointsDataLabel.Content = EmployeeToDisplay.WorkPoints;
             workingTimeDataLabel.Content = EmployeeToDisplay.WorkingTime;
 
 
-            _employeeService = new GenericDataService<Domain.Models.Employee>(_context);
+            _employeeService = new EmployeeDataService(_context, new  GenericDataService<Domain.Models.Employee>(_context));
 
             Employees = employees;
         }

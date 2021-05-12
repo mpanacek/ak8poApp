@@ -30,8 +30,6 @@ namespace SecretaryApp.WPF.Views
     /// </summary>
     public partial class AddNewEmployeeView : Window
     {
-        //  public SaveEmployeeCommand SaveEmployeeCommand { get; set; }
-
         public IDataService<Domain.Models.Employee> _employeeService { get; set; }
 
         ObservableCollection<Domain.Models.Employee> Employees;
@@ -39,7 +37,6 @@ namespace SecretaryApp.WPF.Views
         {
             _employeeService = new GenericDataService<Domain.Models.Employee>(_context);
             Employees = employees;
-            //    SaveEmployeeCommand = new SaveEmployeeCommand(this);
             InitializeComponent();
         }
 
@@ -63,8 +60,7 @@ namespace SecretaryApp.WPF.Views
             Domain.Models.Employee employee = new Domain.Models.Employee();
 
             if(nameTextBox.Text != "" && surnameTextBox.Text != "" && workingTimeTextBox.Text != "" && workMailTextBox.Text != ""
-                && privateMailTextBox.Text != "" && privatePhoneTextBox.Text != "" && workPhoneTextBox.Text != "" && workPointsTextBox.Text != "" 
-                && workPointsNoEngTextBox.Text != "")
+                && privateMailTextBox.Text != "" && privatePhoneTextBox.Text != "" && workPhoneTextBox.Text != "")
             {
                 employee.Name = nameTextBox.Text.ToString();
                 employee.Surname = surnameTextBox.Text.ToString();
@@ -74,9 +70,7 @@ namespace SecretaryApp.WPF.Views
                 employee.WorkPhone = workPhoneTextBox.Text.ToString();
                 employee.PersonalPhone = privatePhoneTextBox.Text.ToString();
                 employee.DoctoralStudent = (bool)doktorantCheckBox.IsChecked;
-                //employee.WorkPoints = int.Parse(workPointsTextBox.Text.ToString());
-                employee.WorkPoints_NoEng = int.Parse(workPointsNoEngTextBox.Text.ToString());
-                employee.WorkingTime = int.Parse(workPointsNoEngTextBox.Text.ToString());
+                employee.WorkingTime = int.Parse(workingTimeTextBox.Text.ToString());
             }
 
             _employeeService.Create(employee);

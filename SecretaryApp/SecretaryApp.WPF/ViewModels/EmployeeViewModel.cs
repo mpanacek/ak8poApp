@@ -45,7 +45,7 @@ namespace SecretaryApp.WPF.ViewModels
             AddEmployeeCommand = new AddEmployeeCommand(this);
             OpenEmployeeDetailCommand = new OpenEmployeeDetailCommand(this);
 
-            _employeeService = new GenericDataService<Employee>(_context);
+            _employeeService = new EmployeeDataService(_context, new GenericDataService<Employee>(_context));
             LoadEmployees();
         }
 
