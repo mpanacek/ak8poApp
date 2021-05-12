@@ -12,9 +12,28 @@ namespace SecretaryApp.Domain.Models
         public string WorkPhone { get; set; }
         public string PersonalPhone { get; set; }
         public int WorkPoints_NoEng { get; set; }
-        public int WorkPoints { get; set; }
+      //  public int WorkPoints { get; set; }
         public double WorkingTime { get; set; }
         public bool DoctoralStudent { get; set; }
-        IEnumerable<WorkLabel> WorkLabels { get; set; }
+        public IEnumerable<WorkLabel> WorkLabels { get; set; }
+
+        public double WorkPoints 
+        { 
+            get 
+            {
+                return GetWorkPoints(); 
+            }
+        }
+
+        public double GetWorkPoints()
+        {
+            double workPoints = 0;
+            foreach (var workLabel in WorkLabels)
+            {
+                workPoints += workLabel.NumberOfPoints();
+            }
+
+            return workPoints;
+        }
     }
 }

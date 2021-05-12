@@ -74,7 +74,7 @@ namespace SecretaryApp.WPF.Views
                 employee.WorkPhone = workPhoneTextBox.Text.ToString();
                 employee.PersonalPhone = privatePhoneTextBox.Text.ToString();
                 employee.DoctoralStudent = (bool)doktorantCheckBox.IsChecked;
-                employee.WorkPoints = int.Parse(workPointsTextBox.Text.ToString());
+                //employee.WorkPoints = int.Parse(workPointsTextBox.Text.ToString());
                 employee.WorkPoints_NoEng = int.Parse(workPointsNoEngTextBox.Text.ToString());
                 employee.WorkingTime = int.Parse(workPointsNoEngTextBox.Text.ToString());
             }

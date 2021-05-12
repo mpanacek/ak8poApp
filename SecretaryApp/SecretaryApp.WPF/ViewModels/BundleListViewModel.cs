@@ -27,8 +27,6 @@ namespace SecretaryApp.WPF.ViewModels
             set 
             { 
                 selectedEmployee = value;
-
-
             }
         }
 
@@ -64,7 +62,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public BundleListViewModel(SecretaryAppDbContextFactory _context)
         {
-            _employeeService = new GenericDataService<Employee>(_context);
+            _employeeService = new EmployeeDataService(_context, new GenericDataService<Employee>(_context));
             _worklabelDataService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
             AddWorkLabelToEmployeeCommand = new AddWorkLabelToEmployeeCommand(this);
             LoadData();
@@ -83,6 +81,7 @@ namespace SecretaryApp.WPF.ViewModels
         {
             label.Employee = selectedEmployee;
             WorkLabels.Remove(label);
+
             _worklabelDataService.Update(label.Id, label);
         }
     }

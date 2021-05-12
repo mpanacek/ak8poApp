@@ -57,7 +57,7 @@
 
                             <TextBlock  Text="{Binding FullName}" />
                             <TextBlock Grid.Column="1" Text="{Binding WorkEmail}" />
-                            <TextBlock Grid.Column="2" Text="{Binding WorkPhone}" />
+                            <TextBlock Grid.Column="2" Text="{Binding WorkPoints}" />
                             <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenEmployeeDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
 
                         </Grid>
