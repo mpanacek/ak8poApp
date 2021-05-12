@@ -14,8 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="WorkLabelList" Grid.Row="0">
-            <ItemsControl Grid.Row="0" ItemsSource="{Binding WorkLabels}">
+            <ItemsControl x:Name="WorkLabelList" Grid.Row="0" ItemsSource="{Binding WorkLabels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -36,9 +35,17 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ListView>
 
-        <ListView x:Name="ListView" Grid.Row="1">
+        <ListView x:Name="ListView" Grid.Row="1" Focusable="False">
+            <!--<ListView.ItemContainerStyle>
+            --><!--<Style>
+                <Style.Triggers>
+                        <Trigger Property="Control.FocusVisualStyle" Value="Transparent">
+                        <Setter Property="Control.Background" Value="Transparent" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>--><!--
+            </ListView.ItemContainerStyle>-->
             <ItemsControl Grid.Row="1" ItemsSource="{Binding Employees}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

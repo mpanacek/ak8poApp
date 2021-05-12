@@ -28,7 +28,7 @@ namespace SecretaryApp.WPF.Views.Employee
     public partial class EmployeeManageWorkLabels : Window, INotifyPropertyChanged
     {
         IDataService<Domain.Models.Employee> _employeeDataService { get; set; }
-       // IDataService<WorkLabel> _workLabelDataService { get; set; }
+        IDataService<WorkLabel> _workLabelDataService { get; set; }
 
         private ObservableCollection<WorkLabel> workLabels;
 
@@ -55,14 +55,14 @@ namespace SecretaryApp.WPF.Views.Employee
 
         public Domain.Models.Employee EmployeeToDisplay { get; set; }
 
-        public EmployeeManageWorkLabels(Domain.Models.Employee employee, SecretaryAppDbContextFactory _context, ObservableCollection<WorkLabel> unassignedWorkLabels)
+        public EmployeeManageWorkLabels(Domain.Models.Employee employee, IDataService<WorkLabel> workLabelService, IDataService<Domain.Models.Employee> dataService, ObservableCollection<WorkLabel> unassignedWorkLabels)
         {
             InitializeComponent();
 
             DataContext = this;
-            
-            _employeeDataService = new EmployeeDataService(_context, new GenericDataService<Domain.Models.Employee>(_context));
-          //  _workLabelDataService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
+
+            _employeeDataService = dataService;
+            _workLabelDataService = workLabelService;
 
             EmployeeToDisplay = employee;
             UnassignedWorkLabels = unassignedWorkLabels;
@@ -85,7 +85,7 @@ namespace SecretaryApp.WPF.Views.Employee
             workPointsDataLabel.Content = EmployeeToDisplay.WorkPoints;
             workPointsNoEngDataLabel.Content = EmployeeToDisplay.WorkPoints_NoEng;
 
-            WorkLabelAlgorithm.Instance._workLabelService.Update(parameter.Id, parameter);
+            _workLabelDataService.Update(parameter.Id, parameter);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

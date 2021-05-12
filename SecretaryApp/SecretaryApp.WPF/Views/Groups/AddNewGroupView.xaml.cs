@@ -17,7 +17,7 @@ namespace SecretaryApp.WPF.Views.Groups
         public IDataService<Group> _groupService { get; set; }
         public ObservableCollection<Group> Groups { get; set; }
 
-        public AddNewGroupView(SecretaryAppDbContextFactory _context, ObservableCollection<Group> groups)
+        public AddNewGroupView(IDataService<Group> dataService, ObservableCollection<Group> groups)
         {
             InitializeComponent();
 
@@ -27,7 +27,7 @@ namespace SecretaryApp.WPF.Views.Groups
             languageComboBox.ItemsSource = Enum.GetValues(typeof(Language)).Cast<Language>();
 
             Groups = groups;
-            _groupService = new GenericDataService<Group>(_context);
+            _groupService = dataService;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)

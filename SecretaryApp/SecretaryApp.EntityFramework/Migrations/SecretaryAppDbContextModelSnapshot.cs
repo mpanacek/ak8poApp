@@ -179,7 +179,8 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
                         .WithMany("Groups")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Subject");
                 });
@@ -188,11 +189,13 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Employee", "Employee")
                         .WithMany("WorkLabels")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
                         .WithMany("WorkLabels")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Employee");
 

@@ -33,9 +33,9 @@ namespace SecretaryApp.WPF.Views
         public IDataService<Domain.Models.Employee> _employeeService { get; set; }
 
         ObservableCollection<Domain.Models.Employee> Employees;
-        public AddNewEmployeeView(SecretaryAppDbContextFactory _context, ObservableCollection<Domain.Models.Employee> employees)
+        public AddNewEmployeeView(IDataService<Domain.Models.Employee> dataService, ObservableCollection<Domain.Models.Employee> employees)
         {
-            _employeeService = new EmployeeDataService(_context, new GenericDataService<Domain.Models.Employee>(_context));
+            _employeeService = dataService;
             Employees = employees;
             InitializeComponent();
         }

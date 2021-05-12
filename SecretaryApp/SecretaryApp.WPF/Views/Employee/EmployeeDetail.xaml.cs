@@ -16,6 +16,7 @@ using SecretaryApp.Domain.Models;
 using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
+using SecretaryApp.WPF.Logic;
 
 namespace SecretaryApp.WPF.Views.Employee
 {
@@ -29,7 +30,7 @@ namespace SecretaryApp.WPF.Views.Employee
         public ObservableCollection<Domain.Models.Employee> Employees;
         public IDataService<Domain.Models.Employee> _employeeService { get; set; }
 
-        public EmployeeDetail(Domain.Models.Employee employee, SecretaryAppDbContextFactory _context, ObservableCollection<Domain.Models.Employee> employees)
+        public EmployeeDetail(Domain.Models.Employee employee, IDataService<Domain.Models.Employee> dataService, ObservableCollection<Domain.Models.Employee> employees)
         {
             InitializeComponent();
 
@@ -51,7 +52,7 @@ namespace SecretaryApp.WPF.Views.Employee
             workingTimeDataLabel.Content = EmployeeToDisplay.WorkingTime;
 
 
-            _employeeService = new EmployeeDataService(_context, new  GenericDataService<Domain.Models.Employee>(_context));
+            _employeeService = dataService;
 
             Employees = employees;
         }
@@ -59,6 +60,7 @@ namespace SecretaryApp.WPF.Views.Employee
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             _employeeService.Delete(EmployeeToDisplay.Id);
+
             Employees.Remove(EmployeeToDisplay);
             Close();
         }

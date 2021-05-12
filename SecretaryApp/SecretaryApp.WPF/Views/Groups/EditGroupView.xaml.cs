@@ -25,13 +25,17 @@ namespace SecretaryApp.WPF.Views.Groups
     public partial class EditGroupView : Window
     {
         private IDataService<Group> _groupService { get; set; }
+        private IDataService<WorkLabel> _workLabelService { get; set; }
         public Group GroupToEdit { get; set; }
 
-        public EditGroupView(SecretaryAppDbContextFactory _context, Group group)
+        public List<WorkLabel> NewWorkLabels { get; set; }
+        public EditGroupView(IDataService<Group> dataService, SecretaryAppDbContextFactory _context, Group group)
         {
             InitializeComponent();
 
-            _groupService = new GroupDataService(_context, new GenericDataService<Group>(_context));
+            _groupService = dataService;
+            _workLabelService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
+
             GroupToEdit = group;
 
             headingLabel.Content = GroupToEdit;
@@ -54,12 +58,14 @@ namespace SecretaryApp.WPF.Views.Groups
             languageComboBox.SelectedItem = GroupToEdit.Language;
         }
 
-        public void SaveEditedGroup(object sender, RoutedEventArgs e)
+        public async void SaveEditedGroup(object sender, RoutedEventArgs e)
         {
             if (nameTextBox.Text != "" && numberOfStudentsTextBox.Text != "")
             {
                 GroupToEdit.Name = nameTextBox.Text;
                 GroupToEdit.Shortcut = shortcutTextBox.Text;
+
+                IEnumerable<WorkLabel> oldWorkLabels = await _workLabelService.GetAll();
 
                 int newNumberOfStudents = int.Parse(numberOfStudentsTextBox.Text);
                 if (GroupToEdit.NumberOfStudents != newNumberOfStudents)
@@ -68,7 +74,7 @@ namespace SecretaryApp.WPF.Views.Groups
 
                     if(subject!= null)
                     {
-                        WorkLabelAlgorithm.Instance.RecalculationAlgorithm(subject, newNumberOfStudents);
+                       NewWorkLabels = WorkLabelAlgorithm.Instance.RecalculationAlgorithm(subject, newNumberOfStudents, oldWorkLabels);
                     }
                 }
 
@@ -78,7 +84,13 @@ namespace SecretaryApp.WPF.Views.Groups
                 GroupToEdit.StudyType = (StudyType)studyTypeComboBox.SelectedItem;
                 GroupToEdit.Language = (Language)languageComboBox.SelectedItem;
 
-                _groupService.Update(GroupToEdit.Id, GroupToEdit);
+                await _groupService.Update(GroupToEdit.Id, GroupToEdit);
+
+                foreach (var workLabel in NewWorkLabels)
+                {
+                    await _workLabelService.Update(workLabel.Id, workLabel);
+                }
+
                 Close();
             }
         }

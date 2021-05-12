@@ -41,20 +41,26 @@ namespace SecretaryApp.WPF.Views.Subjects
 
         public IDataService<Group> _groupService { get; set; }
         public IDataService<Subject> _subjectService { get; set; }
+        public IDataService<WorkLabel> _workLabelService { get; set; }
+
         public ObservableCollection<Group> SubjectGroups { get; set; }
         public Subject CurrentSubject { get; set; }
         public AddGroupTosubjectCommand AddGroupTosubjectCommand { get; set; }
+        public List<WorkLabel> NewWorkLabels { get; set; }
 
-
-        public AddGroupToSubjectView(SecretaryAppDbContextFactory _context, Subject subject, ObservableCollection<Group> subjectGroups)
+        public AddGroupToSubjectView(IDataService<Subject> dataService, Subject subject, ObservableCollection<Group> subjectGroups)
         {
             DataContext = this;
             AddGroupTosubjectCommand = new AddGroupTosubjectCommand(this);
             InitializeComponent();
             SubjectGroups = subjectGroups;
             CurrentSubject = subject;
+            var _context = new SecretaryAppDbContextFactory();
+
             _groupService = new GroupDataService(_context, new GenericDataService<Group>(_context));
-            _subjectService = new GenericDataService<Subject>(_context);
+            _subjectService = dataService;
+            _workLabelService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
+
             LoadGroups();
         }
 
@@ -81,10 +87,15 @@ namespace SecretaryApp.WPF.Views.Subjects
 
             CurrentSubject.Groups.ToList().Add(selectedGroup);
 
-            WorkLabelAlgorithm.Instance.Algorithm(CurrentSubject, selectedGroup);
+            NewWorkLabels = WorkLabelAlgorithm.Instance.Algorithm(CurrentSubject, selectedGroup);
 
             Groups.Remove(selectedGroup);
             SubjectGroups.Add(selectedGroup);
+
+            foreach (var workLabel in NewWorkLabels)
+            {
+                _workLabelService.Create(workLabel);
+            }
 
             _groupService.Update(selectedGroup.Id, selectedGroup);
         }

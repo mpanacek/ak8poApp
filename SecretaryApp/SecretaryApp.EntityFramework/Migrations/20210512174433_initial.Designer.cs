@@ -10,7 +10,7 @@ using SecretaryApp.EntityFramework;
 namespace SecretaryApp.EntityFramework.Migrations
 {
     [DbContext(typeof(SecretaryAppDbContext))]
-    [Migration("20210512114901_initial")]
+    [Migration("20210512174433_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,7 +181,8 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
                         .WithMany("Groups")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Subject");
                 });
@@ -190,11 +191,13 @@ namespace SecretaryApp.EntityFramework.Migrations
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Employee", "Employee")
                         .WithMany("WorkLabels")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
                         .WithMany("WorkLabels")
-                        .HasForeignKey("SubjectId");
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Employee");
 

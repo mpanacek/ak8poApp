@@ -22,7 +22,7 @@
 
     public class Group : DomainObject
     {
-        public Subject Subject { get; set; }
+        public Subject? Subject { get; set; }
         public string Shortcut { get; set; }
         public string Name { get; set; }
         public int Class { get; set; }

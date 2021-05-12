@@ -39,12 +39,12 @@ namespace SecretaryApp.WPF.Views.Subjects
         public ObservableCollection<Subject> Subjects { get; set; }
         public Subject SubjectToDisplay { get; set; }
 
-        public SubjectDetailView(Subject subject, SecretaryAppDbContextFactory _context, ObservableCollection<Subject> subjects)
+        public SubjectDetailView(Subject subject, IDataService<Subject> dataService, ObservableCollection<Subject> subjects)
         {
             DataContext = this;
             InitializeComponent();
 
-            _subjectService = new SubjectDataService(_context, new GenericDataService<Subject>(_context));
+            _subjectService = dataService;
             SubjectToDisplay = subject;
 
             if (SubjectToDisplay.Groups != null)
@@ -78,7 +78,7 @@ namespace SecretaryApp.WPF.Views.Subjects
 
         private void addGroup_Click(object sender, RoutedEventArgs e)
         {
-            AddGroupToSubjectView addGroupToSubjectView = new AddGroupToSubjectView(new SecretaryAppDbContextFactory(), SubjectToDisplay, GroupsAssignedToSubject);
+            AddGroupToSubjectView addGroupToSubjectView = new AddGroupToSubjectView(_subjectService, SubjectToDisplay, GroupsAssignedToSubject);
 
             addGroupToSubjectView.Show();
         }

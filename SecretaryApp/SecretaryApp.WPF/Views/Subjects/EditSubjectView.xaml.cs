@@ -17,12 +17,12 @@ namespace SecretaryApp.WPF.Views.Subjects
         private IDataService<Subject> _subjectService { get; set; }
         public Subject SubjectToEdit { get; set; }
 
-        public EditSubjectView(SecretaryAppDbContextFactory _context, Subject subject)
+        public EditSubjectView(IDataService<Subject> dataService, Subject subject)
         {
             DataContext = this;
             InitializeComponent();
 
-            _subjectService = new SubjectDataService(_context, new GenericDataService<Subject>(_context));
+            _subjectService = dataService;
 
             SubjectToEdit = subject;
             headingDataLabel.Content = SubjectToEdit.Name;

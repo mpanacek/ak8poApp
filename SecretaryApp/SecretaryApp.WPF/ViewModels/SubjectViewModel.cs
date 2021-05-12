@@ -37,7 +37,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public void EditSubject(Subject subject)
         {
-            EditSubjectView editSubjectView = new EditSubjectView(new SecretaryAppDbContextFactory(), subject);
+            EditSubjectView editSubjectView = new EditSubjectView(_subjectService, subject);
 
             editSubjectView.Show();
         }
@@ -60,7 +60,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public void AddNewSubject()
         {
-            AddNewSubjectView addNewSubjectView = new AddNewSubjectView(new SecretaryAppDbContextFactory(), Subjects);
+            AddNewSubjectView addNewSubjectView = new AddNewSubjectView(_subjectService, Subjects);
 
             addNewSubjectView.Height = 450;
             addNewSubjectView.Width = 850;
@@ -69,7 +69,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public void OpenSubjectDetail(Subject subject)
         {
-            SubjectDetailView subjectDetailView = new SubjectDetailView(subject, new SecretaryAppDbContextFactory(), Subjects);
+            SubjectDetailView subjectDetailView = new SubjectDetailView(subject, _subjectService, Subjects);
 
             subjectDetailView.Height = 450;
             subjectDetailView.Width = 850;

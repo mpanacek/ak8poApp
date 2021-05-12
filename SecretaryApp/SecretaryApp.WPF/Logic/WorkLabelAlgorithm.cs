@@ -20,7 +20,7 @@ namespace SecretaryApp.WPF.Logic
             {
                 if (instance == null)
                 {
-                    instance = new WorkLabelAlgorithm(new SecretaryAppDbContextFactory());
+                    instance = new WorkLabelAlgorithm();
                 }
                 return instance;
             }
@@ -28,15 +28,8 @@ namespace SecretaryApp.WPF.Logic
 
         #endregion
 
-        public IDataService<WorkLabel> _workLabelService { get; set; }
 
-        public WorkLabelAlgorithm(SecretaryAppDbContextFactory _context)
-        {
-            _workLabelService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
-        }
-
-
-        public void Algorithm(Subject subject, Group group)
+        public List<WorkLabel> Algorithm(Subject subject, Group group)
         {
             int numberOfStudents = group.NumberOfStudents;
             int maximumClassSize = subject.ClassSize;
@@ -88,12 +81,13 @@ namespace SecretaryApp.WPF.Logic
             presentationWorkLabel.Subject = subject;
             workLabels.Add(presentationWorkLabel);
 
-            SaveWorkLabels(workLabels);
+            return workLabels;
+           // SaveWorkLabels(workLabels);
         }
 
-        public async void RecalculationAlgorithm(Subject subject, int numberOfStudents)
+        public List<WorkLabel> RecalculationAlgorithm(Subject subject, int numberOfStudents, IEnumerable<WorkLabel> workLabelsRaw)
         {
-            IEnumerable<WorkLabel> workLabelsRaw = await _workLabelService.GetAll();
+           // IEnumerable<WorkLabel> workLabelsRaw = await _workLabelService.GetAll();
 
             List<WorkLabel> workLabels = workLabelsRaw.Where(w => w.Subject.Id == subject.Id).ToList();
 
@@ -168,23 +162,24 @@ namespace SecretaryApp.WPF.Logic
                 }
             }
 
-            UpdateWorkLabels(workLabels);
+            return workLabels;
+            //UpdateWorkLabels(workLabels);
         }
 
-        private void UpdateWorkLabels(List<WorkLabel> workLabels)
-        {
-            foreach (var workLabel in workLabels)
-            {
-                _workLabelService.Update(workLabel.Id, workLabel);
-            }
-        }
+        //private void UpdateWorkLabels(List<WorkLabel> workLabels)
+        //{
+        //    foreach (var workLabel in workLabels)
+        //    {
+        //        _workLabelService.Update(workLabel.Id, workLabel);
+        //    }
+        //}
 
-        private void SaveWorkLabels(List<WorkLabel> workLabels)
-        {
-            foreach (var workLabel in workLabels)
-            {
-                _workLabelService.Create(workLabel);
-            }
-        }
+        //private void SaveWorkLabels(List<WorkLabel> workLabels)
+        //{
+        //    foreach (var workLabel in workLabels)
+        //    {
+        //        _workLabelService.Create(workLabel);
+        //    }
+        //}
     }
 }

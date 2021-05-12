@@ -57,7 +57,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public void AddNewEmployeeOpenWindow()
         {
-            AddNewEmployeeView addNewEmployee = new AddNewEmployeeView(new SecretaryAppDbContextFactory(), Employees);
+            AddNewEmployeeView addNewEmployee = new AddNewEmployeeView(_employeeService, Employees);
 
             addNewEmployee.Height = 450;
             addNewEmployee.Width = 850;
@@ -66,7 +66,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public void OpenEmployeeDetail(Employee employee)
         {
-            EmployeeDetail employeeDetail = new EmployeeDetail(employee, new SecretaryAppDbContextFactory(), Employees);
+            EmployeeDetail employeeDetail = new EmployeeDetail(employee, _employeeService, Employees);
 
             employeeDetail.Height = 450;
             employeeDetail.Width = 850;

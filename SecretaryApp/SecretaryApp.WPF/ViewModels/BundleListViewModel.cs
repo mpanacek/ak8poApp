@@ -15,7 +15,7 @@ namespace SecretaryApp.WPF.ViewModels
     public class BundleListViewModel : ViewModelBase
     {
         private IDataService<Employee> _employeeService { get; set; }
-      //  private IDataService<WorkLabel> _worklabelDataService { get; set; }
+        private IDataService<WorkLabel> _worklabelDataService { get; set; }
 
         public AddWorkLabelToEmployeeCommand AddWorkLabelToEmployeeCommand { get; set; }
         public OpenManageEmployeeWorkLabelsViewCommand OpenManageEmployeeWorkLabelsViewCommand { get; set; }
@@ -65,7 +65,7 @@ namespace SecretaryApp.WPF.ViewModels
         public BundleListViewModel(SecretaryAppDbContextFactory _context)
         {
             _employeeService = new EmployeeDataService(_context, new GenericDataService<Employee>(_context));
-           // _worklabelDataService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
+            _worklabelDataService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
             AddWorkLabelToEmployeeCommand = new AddWorkLabelToEmployeeCommand(this);
             OpenManageEmployeeWorkLabelsViewCommand = new OpenManageEmployeeWorkLabelsViewCommand(this);
             LoadData();
@@ -76,7 +76,7 @@ namespace SecretaryApp.WPF.ViewModels
             IEnumerable<Employee> entities = await _employeeService.GetAll();
             Employees = new ObservableCollection<Employee>(entities);
 
-            IEnumerable<WorkLabel> workLabels = await WorkLabelAlgorithm.Instance._workLabelService.GetAll();
+            IEnumerable<WorkLabel> workLabels = await _worklabelDataService.GetAll();
             WorkLabels = new ObservableCollection<WorkLabel>(workLabels.Where(w => w.Employee == null));
         }
 
@@ -86,7 +86,7 @@ namespace SecretaryApp.WPF.ViewModels
             {
                 label.Employee = SelectedEmployee;
 
-                WorkLabelAlgorithm.Instance._workLabelService.Update(label.Id, label);
+                _worklabelDataService.Update(label.Id, label);
 
 
                 WorkLabels.Remove(label);
@@ -98,7 +98,7 @@ namespace SecretaryApp.WPF.ViewModels
 
         public void OpenEmployeeManageWorkLabel(Employee employee)
         {
-            EmployeeManageWorkLabels employeeManageWorkLabels = new EmployeeManageWorkLabels(employee, new SecretaryAppDbContextFactory(), WorkLabels);
+            EmployeeManageWorkLabels employeeManageWorkLabels = new EmployeeManageWorkLabels(employee, _worklabelDataService, _employeeService, WorkLabels);
             employeeManageWorkLabels.Show();
         }
     }

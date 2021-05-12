@@ -17,7 +17,7 @@ namespace SecretaryApp.WPF.Views.Subjects
         public IDataService<Subject> _subjectService { get; set; }
         public ObservableCollection<Subject> Subjects { get; set; }
 
-        public AddNewSubjectView(SecretaryAppDbContextFactory _context, ObservableCollection<Subject> subjects)
+        public AddNewSubjectView(IDataService<Subject> dataService, ObservableCollection<Subject> subjects)
         {
             InitializeComponent();
 
@@ -25,7 +25,7 @@ namespace SecretaryApp.WPF.Views.Subjects
             languageComboBox.ItemsSource = Enum.GetValues(typeof(Language)).Cast<Language>();
 
             Subjects = subjects;
-            _subjectService = new GenericDataService<Subject>(_context);
+            _subjectService = dataService;
         }
 
         private void saveButton_Click(object sender, RoutedEventArgs e)

@@ -17,11 +17,11 @@ namespace SecretaryApp.WPF.Views.Groups
 
         public Group GroupToDisplay { get; set; }
 
-        public GroupDetailView(Group group, SecretaryAppDbContextFactory _context, ObservableCollection<Group> groups)
+        public GroupDetailView(Group group, IDataService<Group> dataService, ObservableCollection<Group> groups)
         {
             InitializeComponent();
 
-            _groupService = new GenericDataService<Group>(_context);
+            _groupService = dataService;
             GroupToDisplay = group;
             Groups = groups;
 
