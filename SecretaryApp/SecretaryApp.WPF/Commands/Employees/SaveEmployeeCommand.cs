@@ -28,7 +28,7 @@ namespace SecretaryApp.WPF.Commands
 
         public void Execute(object parameter)
         {
-            AddNewEmployeeView.SaveNewEmployee();
+            //AddNewEmployeeView.SaveNewEmployee();
         }
     }
 }

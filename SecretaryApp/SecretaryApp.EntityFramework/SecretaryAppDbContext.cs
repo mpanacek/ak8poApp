@@ -12,7 +12,7 @@ namespace SecretaryApp.EntityFramework
         public DbSet<Group> Groups { get; set; }
         public DbSet<Subject> Subjects { get; set; }
       //  public DbSet<SubjectGroups> SubjectGroups { get; set; }
-        public DbSet<WeightsOfWorkPoints> WeightsOfWorkPoints { get; set; }
+       // public DbSet<WeightsOfWorkPoints> WeightsOfWorkPoints { get; set; }
         public DbSet<WorkLabel> WorkLabels { get; set; }
 
         public SecretaryAppDbContext(DbContextOptions options) : base(options) { }

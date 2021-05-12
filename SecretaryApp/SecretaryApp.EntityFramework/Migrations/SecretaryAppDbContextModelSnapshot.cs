@@ -50,12 +50,6 @@ namespace SecretaryApp.EntityFramework.Migrations
                     b.Property<string>("WorkPhone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("WorkPoints")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkPoints_NoEng")
-                        .HasColumnType("int");
-
                     b.Property<double>("WorkingTime")
                         .HasColumnType("float");
 
@@ -144,54 +138,6 @@ namespace SecretaryApp.EntityFramework.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("SecretaryApp.Domain.Models.WeightsOfWorkPoints", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("ClassifiedCredit")
-                        .HasColumnType("float");
-
-                    b.Property<double>("ClassifiedCredit_Eng")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Credit")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Credit_Eng")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Exam")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Exam_Eng")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Excercise")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Excercise_Eng")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Lecture")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Lecture_Eng")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Seminar")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Seminar_Eng")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WeightsOfWorkPoints");
-                });
-
             modelBuilder.Entity("SecretaryApp.Domain.Models.WorkLabel", b =>
                 {
                     b.Property<int>("Id")
@@ -241,7 +187,7 @@ namespace SecretaryApp.EntityFramework.Migrations
             modelBuilder.Entity("SecretaryApp.Domain.Models.WorkLabel", b =>
                 {
                     b.HasOne("SecretaryApp.Domain.Models.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("WorkLabels")
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("SecretaryApp.Domain.Models.Subject", "Subject")
@@ -251,6 +197,11 @@ namespace SecretaryApp.EntityFramework.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("SecretaryApp.Domain.Models.Employee", b =>
+                {
+                    b.Navigation("WorkLabels");
                 });
 
             modelBuilder.Entity("SecretaryApp.Domain.Models.Subject", b =>

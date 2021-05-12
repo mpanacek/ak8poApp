@@ -34,10 +34,14 @@ namespace SecretaryApp.Domain.Models
         private double GetWorkPoints()
         {
             double workPoints = 0;
-            foreach (var workLabel in WorkLabels)
+            if(WorkLabels != null)
             {
-                workPoints += workLabel.NumberOfPoints();
+                foreach (var workLabel in WorkLabels)
+                {
+                    workPoints += workLabel.NumberOfPoints;
+                }
             }
+            
 
             return workPoints;
         }
@@ -46,12 +50,14 @@ namespace SecretaryApp.Domain.Models
         {
             double workPoints = 0;
 
-            foreach (var workLabel in WorkLabels)
+            if (WorkLabels != null)
             {
-                if(workLabel.Language == Language.en)
-                    workPoints += workLabel.NumberOfPoints();
+                foreach (var workLabel in WorkLabels)
+                {
+                    if (workLabel.Language == Language.en)
+                        workPoints += workLabel.NumberOfPoints;
+                }
             }
-
             return workPoints;
         }
     }

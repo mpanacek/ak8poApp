@@ -2,7 +2,7 @@
 
 namespace SecretaryApp.EntityFramework.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +19,6 @@ namespace SecretaryApp.EntityFramework.Migrations
                     PersonalEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WorkPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PersonalPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WorkPoints_NoEng = table.Column<int>(type: "int", nullable: false),
-                    WorkPoints = table.Column<int>(type: "int", nullable: false),
                     WorkingTime = table.Column<double>(type: "float", nullable: false),
                     DoctoralStudent = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -48,30 +46,6 @@ namespace SecretaryApp.EntityFramework.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Subjects", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WeightsOfWorkPoints",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Lecture = table.Column<double>(type: "float", nullable: false),
-                    Excercise = table.Column<double>(type: "float", nullable: false),
-                    Seminar = table.Column<double>(type: "float", nullable: false),
-                    Lecture_Eng = table.Column<double>(type: "float", nullable: false),
-                    Excercise_Eng = table.Column<double>(type: "float", nullable: false),
-                    Seminar_Eng = table.Column<double>(type: "float", nullable: false),
-                    Credit = table.Column<double>(type: "float", nullable: false),
-                    ClassifiedCredit = table.Column<double>(type: "float", nullable: false),
-                    Exam = table.Column<double>(type: "float", nullable: false),
-                    Credit_Eng = table.Column<double>(type: "float", nullable: false),
-                    ClassifiedCredit_Eng = table.Column<double>(type: "float", nullable: false),
-                    Exam_Eng = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WeightsOfWorkPoints", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,9 +126,6 @@ namespace SecretaryApp.EntityFramework.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Groups");
-
-            migrationBuilder.DropTable(
-                name: "WeightsOfWorkPoints");
 
             migrationBuilder.DropTable(
                 name: "WorkLabels");

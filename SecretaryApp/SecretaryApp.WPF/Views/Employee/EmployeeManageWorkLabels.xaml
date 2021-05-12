@@ -1,0 +1,55 @@
+﻿<Window x:Class="SecretaryApp.WPF.Views.Employee.EmployeeManageWorkLabels"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecretaryApp.WPF.Views.Employee"
+        mc:Ignorable="d"
+        Title="EmployeeManageWorkLabels" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" x:Name="fullNameLabel" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" FontFamily="Book Antiqua" FontStyle="Italic"/>
+        <Label Grid.Row="1" Content="Pracovné body" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Grid.Row="2" x:Name="workPointsDataLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+        <Label Grid.Row="3" Content="Pracovné body bez Eng" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label Grid.Row="4" x:Name="workPointsNoEngDataLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+
+
+        <ListView x:Name="WorkLabelList" Grid.Row="5">
+            <ItemsControl Grid.Row="0" ItemsSource="{Binding WorkLabels}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid >
+                            <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock  Text="{Binding Subject.Name}" />
+                                    <TextBlock  Text="{Binding NumberOfPoints}"/>
+                                    <TextBlock  Text="{Binding LectureType}"/>
+                                    <Button Content="Odstráň" Command="{Binding DataContext.RemoveWorkLabelCommand, ElementName=WorkLabelList}" CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ListView>
+
+        <!--<Button Grid.Row="6" x:Name="backButton" Content="Späť" HorizontalAlignment="Right" VerticalAlignment="Top" Height="35" Width="85" Click="backButton_Click" Margin="0,280,28,0" Grid.RowSpan="2"/>-->
+
+    </Grid>
+</Window>

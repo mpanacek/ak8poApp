@@ -1,4 +1,5 @@
 ﻿using SecretaryApp.Domain.Config;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SecretaryApp.Domain.Models
 {
@@ -17,7 +18,16 @@ namespace SecretaryApp.Domain.Models
         public int NumberOfWeeks { get; set; }
         public Language Language { get; set; }
 
-        public double NumberOfPoints()
+        [NotMapped]
+        public double NumberOfPoints 
+        {
+            get 
+            {
+                return GetNumberOfPoints();
+            }
+        }
+
+        public double GetNumberOfPoints()
         {
             switch (LectureType)
             {

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SecretaryApp.Domain.Models;
 using SecretaryApp.Domain.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,6 +35,7 @@ namespace SecretaryApp.EntityFramework.Services
             {
                 WorkLabel entity = await context.Set<WorkLabel>()
                     .Include(w => w.Subject)
+                    .Include(w => w.Employee)
                     .FirstOrDefaultAsync((e) => e.Id == id);
                 return entity;
             }
@@ -44,6 +47,7 @@ namespace SecretaryApp.EntityFramework.Services
             {
                 IEnumerable<WorkLabel> entities = await context.Set<WorkLabel>()
                     .Include(w => w.Subject)
+                    .Include(w => w.Employee)
                     .ToListAsync();
 
                 return entities;

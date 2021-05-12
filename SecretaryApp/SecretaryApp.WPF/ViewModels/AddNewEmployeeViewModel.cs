@@ -11,7 +11,7 @@ namespace SecretaryApp.WPF.ViewModels
 {
     public class AddNewEmployeeViewModel : ViewModelBase
     {
-        public SaveEmployeeCommand SaveEmployeeCommand { get; set; }
+       // public SaveEmployeeCommand SaveEmployeeCommand { get; set; }
 
         private string name;
 
@@ -28,31 +28,15 @@ namespace SecretaryApp.WPF.ViewModels
             }
         }
 
-        //public string Surname { get; set; }
-        //public string FullName { get; set; }
-        //public string WorkEmail { get; set; }
-        //public string PersonalEmail { get; set; }
-        //public string WorkPhone { get; set; }
-        //public string PersonalPhone { get; set; }
-        //public int WorkPoints_NoEng { get; set; }
-        //public int WorkPoints { get; set; }
-        //public double WorkingTime { get; set; }
-        //public bool DoctoralStudent { get; set; }
-
         public AddNewEmployeeViewModel()
         {
-            SaveEmployeeCommand = new SaveEmployeeCommand(this);
-
-            //AddNewEmployeeView addNewEmployee = new AddNewEmployeeView();
-            //addNewEmployee.Height = 450;
-            //addNewEmployee.Width = 850;
-            //addNewEmployee.Show();
+     //       SaveEmployeeCommand = new SaveEmployeeCommand(this);
         }
 
-        public void SaveNewEmployee()
-        {
-            Employee employee = new Employee();
-            employee.Name = Name;
-        }
+        //public void SaveNewEmployee()
+        //{
+        //    Employee employee = new Employee();
+        //    employee.Name = Name;
+        //}
     }
 }

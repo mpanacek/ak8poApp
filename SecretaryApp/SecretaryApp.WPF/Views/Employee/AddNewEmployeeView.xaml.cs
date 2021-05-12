@@ -35,7 +35,7 @@ namespace SecretaryApp.WPF.Views
         ObservableCollection<Domain.Models.Employee> Employees;
         public AddNewEmployeeView(SecretaryAppDbContextFactory _context, ObservableCollection<Domain.Models.Employee> employees)
         {
-            _employeeService = new GenericDataService<Domain.Models.Employee>(_context);
+            _employeeService = new EmployeeDataService(_context, new GenericDataService<Domain.Models.Employee>(_context));
             Employees = employees;
             InitializeComponent();
         }
@@ -71,12 +71,14 @@ namespace SecretaryApp.WPF.Views
                 employee.PersonalPhone = privatePhoneTextBox.Text.ToString();
                 employee.DoctoralStudent = (bool)doktorantCheckBox.IsChecked;
                 employee.WorkingTime = int.Parse(workingTimeTextBox.Text.ToString());
+
+                _employeeService.Create(employee);
+                Employees.Add(employee);
+
+                Close();
             }
 
-            _employeeService.Create(employee);
-            Employees.Add(employee);
-
-            Close();
+            
         }
     }
 }

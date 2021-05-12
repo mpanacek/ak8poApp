@@ -27,7 +27,7 @@
                             <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock  Text="{Binding Subject.Name}" />
-                                    <TextBlock  Text="{Binding NumberOfStudents}"/>
+                                    <TextBlock  Text="{Binding NumberOfPoints}"/>
                                     <ComboBox ItemsSource="{Binding DataContext.Employees, ElementName=WorkLabelList}" DisplayMemberPath="FullName" SelectedItem="{Binding DataContext.SelectedEmployee, ElementName=WorkLabelList}"/>
                                     <Button Content="Add" Command="{Binding DataContext.AddWorkLabelToEmployeeCommand, ElementName=WorkLabelList}" CommandParameter="{Binding}"/>
                                 </StackPanel>
@@ -58,7 +58,7 @@
                             <TextBlock  Text="{Binding FullName}" />
                             <TextBlock Grid.Column="1" Text="{Binding WorkEmail}" />
                             <TextBlock Grid.Column="2" Text="{Binding WorkPoints}" />
-                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenEmployeeDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenManageEmployeeWorkLabelsViewCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
 
                         </Grid>
                     </DataTemplate>

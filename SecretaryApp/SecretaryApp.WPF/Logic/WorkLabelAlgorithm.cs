@@ -28,7 +28,7 @@ namespace SecretaryApp.WPF.Logic
 
         #endregion
 
-        private IDataService<WorkLabel> _workLabelService { get; set; }
+        public IDataService<WorkLabel> _workLabelService { get; set; }
 
         public WorkLabelAlgorithm(SecretaryAppDbContextFactory _context)
         {
