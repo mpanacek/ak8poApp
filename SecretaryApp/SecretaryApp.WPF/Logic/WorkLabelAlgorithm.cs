@@ -1,7 +1,4 @@
 ﻿using SecretaryApp.Domain.Models;
-using SecretaryApp.Domain.Services;
-using SecretaryApp.EntityFramework;
-using SecretaryApp.EntityFramework.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +50,7 @@ namespace SecretaryApp.WPF.Logic
                 workLabel.NumberOfHours = subject.HoursOfExcercises;
                 workLabel.NumberOfWeeks = subject.NumberOfWeeks;
                 workLabel.Subject = subject;
+                workLabel.Name = subject.Name;
                 workLabels.Add(workLabel);
             }
 
@@ -79,6 +77,7 @@ namespace SecretaryApp.WPF.Logic
             presentationWorkLabel.NumberOfHours = subject.HoursOfLectures;
             presentationWorkLabel.NumberOfWeeks = subject.NumberOfWeeks;
             presentationWorkLabel.Subject = subject;
+            presentationWorkLabel.Name = subject.Name;
             workLabels.Add(presentationWorkLabel);
 
             return workLabels;
@@ -87,8 +86,6 @@ namespace SecretaryApp.WPF.Logic
 
         public List<WorkLabel> RecalculationAlgorithm(Subject subject, int numberOfStudents, IEnumerable<WorkLabel> workLabelsRaw)
         {
-           // IEnumerable<WorkLabel> workLabelsRaw = await _workLabelService.GetAll();
-
             List<WorkLabel> workLabels = workLabelsRaw.Where(w => w.Subject.Id == subject.Id).ToList();
 
             foreach (var worklLabel in workLabels)
@@ -163,23 +160,6 @@ namespace SecretaryApp.WPF.Logic
             }
 
             return workLabels;
-            //UpdateWorkLabels(workLabels);
         }
-
-        //private void UpdateWorkLabels(List<WorkLabel> workLabels)
-        //{
-        //    foreach (var workLabel in workLabels)
-        //    {
-        //        _workLabelService.Update(workLabel.Id, workLabel);
-        //    }
-        //}
-
-        //private void SaveWorkLabels(List<WorkLabel> workLabels)
-        //{
-        //    foreach (var workLabel in workLabels)
-        //    {
-        //        _workLabelService.Create(workLabel);
-        //    }
-        //}
     }
 }

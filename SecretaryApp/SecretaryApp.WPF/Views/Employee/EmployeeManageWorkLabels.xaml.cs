@@ -19,16 +19,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Linq;
+
 
 namespace SecretaryApp.WPF.Views.Employee
 {
+    public delegate void UpdateUi();
+
     /// <summary>
     /// Interaction logic for EmployeeManageWorkLabels.xaml
     /// </summary>
+    /// 
     public partial class EmployeeManageWorkLabels : Window, INotifyPropertyChanged
     {
-        IDataService<Domain.Models.Employee> _employeeDataService { get; set; }
-        IDataService<WorkLabel> _workLabelDataService { get; set; }
+        public BundleListViewDataService _bundleListViewDataService { get; set; }
+
+        public event UpdateUi UpdateUI;
 
         private ObservableCollection<WorkLabel> workLabels;
 
@@ -37,6 +43,21 @@ namespace SecretaryApp.WPF.Views.Employee
         public ObservableCollection<WorkLabel> UnassignedWorkLabels;
 
         public RemoveWorkLabelCommand RemoveWorkLabelCommand { get; set; }
+
+        private ObservableCollection<Domain.Models.Employee> employees;
+
+        public ObservableCollection<Domain.Models.Employee> Employees
+        {
+            get
+            {
+                return employees;
+            }
+            set
+            {
+                employees = value;
+                OnPropertyChanged(nameof(Employees));
+            }
+        }
 
         public void OnPropertyChanged(string propertyName)
         {
@@ -55,14 +76,14 @@ namespace SecretaryApp.WPF.Views.Employee
 
         public Domain.Models.Employee EmployeeToDisplay { get; set; }
 
-        public EmployeeManageWorkLabels(Domain.Models.Employee employee, IDataService<WorkLabel> workLabelService, IDataService<Domain.Models.Employee> dataService, ObservableCollection<WorkLabel> unassignedWorkLabels)
+        public EmployeeManageWorkLabels(Domain.Models.Employee employee, BundleListViewDataService dataService,  
+            ObservableCollection<WorkLabel> unassignedWorkLabels)
         {
             InitializeComponent();
 
             DataContext = this;
 
-            _employeeDataService = dataService;
-            _workLabelDataService = workLabelService;
+            _bundleListViewDataService = dataService;
 
             EmployeeToDisplay = employee;
             UnassignedWorkLabels = unassignedWorkLabels;
@@ -71,23 +92,36 @@ namespace SecretaryApp.WPF.Views.Employee
             fullNameLabel.Content = EmployeeToDisplay.FullName;
             workPointsDataLabel.Content = EmployeeToDisplay.WorkPoints;
             workPointsNoEngDataLabel.Content = EmployeeToDisplay.WorkPoints_NoEng;
-
+            Employees = employees;
+            UpdateUI += updateUI;
+            
+            
             RemoveWorkLabelCommand = new RemoveWorkLabelCommand(this);
         }
 
 
-        public void RemoveWorkLabel(WorkLabel parameter)
+        public async void RemoveWorkLabel(WorkLabel parameter)
         {
             parameter.Employee = null;
+            parameter.EmployeeId = null;
             WorkLabels.Remove(parameter);
             UnassignedWorkLabels.Add(parameter);
 
-            workPointsDataLabel.Content = EmployeeToDisplay.WorkPoints;
-            workPointsNoEngDataLabel.Content = EmployeeToDisplay.WorkPoints_NoEng;
+            await _bundleListViewDataService.Update<WorkLabel>(parameter.Id, parameter);
 
-            _workLabelDataService.Update(parameter.Id, parameter);
+            List<WorkLabel> empWorkLabels = EmployeeToDisplay.WorkLabels.ToList();
+            empWorkLabels.Remove(parameter);
+
+            EmployeeToDisplay.WorkLabels = empWorkLabels;
+            UpdateUI?.Invoke();
         }
 
+        private void updateUI()
+        {
+            workPointsDataLabel.Content = EmployeeToDisplay.WorkPoints;
+            workPointsNoEngDataLabel.Content = EmployeeToDisplay.WorkPoints_NoEng;
+        }
+        
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

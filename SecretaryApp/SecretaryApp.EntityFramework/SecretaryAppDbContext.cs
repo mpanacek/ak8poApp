@@ -35,6 +35,7 @@ namespace SecretaryApp.EntityFramework
                .WithOne(w => w.Employee)
                .OnDelete(DeleteBehavior.SetNull);
 
+
             //modelBuilder.Entity<SubjectGroups>()
             //    .HasKey(c => new { c.GroupId, c.SubjectId });
         }

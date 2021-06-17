@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:SecretaryApp.WPF.ViewModels"
              xmlns:views="clr-namespace:SecretaryApp.WPF.Views"
+             xmlns:viewsW="clr-namespace:SecretaryApp.WPF.Views.WorkLabels"
              xmlns:local="clr-namespace:SecretaryApp.WPF">
                 
     <Application.Resources>
@@ -11,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/Common.xaml"/>
                 <ResourceDictionary Source="/Styles/NavigationBar.xaml"/>
+                <ResourceDictionary Source="/Styles/WorkLabelResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -29,6 +31,11 @@
             <DataTemplate DataType="{x:Type viewModels:BundleListViewModel}">
                 <views:BundleListView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:WorkLabelsViewModel}">
+                <viewsW:WorkLabelsView/>
+            </DataTemplate>
+
         </ResourceDictionary> 
         
     </Application.Resources>

@@ -45,6 +45,10 @@ namespace SecretaryApp.WPF.Commands
                         _navigator.CurrentViewModel = new BundleListViewModel(new EntityFramework.SecretaryAppDbContextFactory());
                         break;
 
+                    case ViewType.WorkLabels:
+                        _navigator.CurrentViewModel = new WorkLabelsViewModel(new EntityFramework.SecretaryAppDbContextFactory());
+                        break;
+
                     default:
                         break;
                 }

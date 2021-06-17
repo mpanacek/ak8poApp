@@ -3,6 +3,7 @@ using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
 using SecretaryApp.WPF.Commands.Subjects;
+using SecretaryApp.WPF.Logic;
 using System;
 using System.Linq;
 using System.Windows;
@@ -59,7 +60,12 @@ namespace SecretaryApp.WPF.Views.Subjects
 
                 if(SubjectToEdit.ClassSize != int.Parse(classSizeTextBox.Text))
                 {
-                    //recalculate number of students in the work labels
+
+                    foreach (var group in SubjectToEdit.Groups)
+                    {
+                        WorkLabelAlgorithm.Instance.RecalculationAlgorithm(SubjectToEdit, group.NumberOfStudents, SubjectToEdit.WorkLabels);
+                    }
+                    
                 }
 
                 SubjectToEdit.ClassSize = int.Parse(classSizeTextBox.Text);

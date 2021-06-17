@@ -11,10 +11,16 @@ namespace SecretaryApp.Domain.Models
     public class WorkLabel : DomainObject
     {
         public LectureType LectureType { get; set; }
+
+        public string Name { get; set; }
         public int NumberOfStudents { get; set; }
         public int NumberOfHours { get; set; }
         public int NumberOfWeeks { get; set; }
         public Language Language { get; set; }
+
+        public int? EmployeeId { get; set; }
+
+        [ForeignKey("EmployeeId")]
         public Employee? Employee { get; set; }
         public Subject? Subject { get; set; }
 

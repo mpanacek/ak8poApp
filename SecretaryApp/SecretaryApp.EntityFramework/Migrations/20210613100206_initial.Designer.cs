@@ -10,7 +10,7 @@ using SecretaryApp.EntityFramework;
 namespace SecretaryApp.EntityFramework.Migrations
 {
     [DbContext(typeof(SecretaryAppDbContext))]
-    [Migration("20210512174433_initial")]
+    [Migration("20210613100206_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,10 +1,8 @@
 ﻿using SecretaryApp.Domain.Models;
-using SecretaryApp.Domain.Services;
 using SecretaryApp.EntityFramework;
 using SecretaryApp.EntityFramework.Services;
 using SecretaryApp.WPF.Commands;
 using SecretaryApp.WPF.Commands.Employees;
-using SecretaryApp.WPF.Logic;
 using SecretaryApp.WPF.Views.Employee;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,12 +12,11 @@ namespace SecretaryApp.WPF.ViewModels
 {
     public class BundleListViewModel : ViewModelBase
     {
-        private IDataService<Employee> _employeeService { get; set; }
-        private IDataService<WorkLabel> _worklabelDataService { get; set; }
+        public BundleListViewDataService _bundleListViewDataService { get; set; }
 
         public AddWorkLabelToEmployeeCommand AddWorkLabelToEmployeeCommand { get; set; }
         public OpenManageEmployeeWorkLabelsViewCommand OpenManageEmployeeWorkLabelsViewCommand { get; set; }
-
+        public RemoveWorkLabelInBundleListCommand RemoveWorkLabelInBundleListCommand { get; set; }
 
         private Employee selectedEmployee;
 
@@ -64,30 +61,31 @@ namespace SecretaryApp.WPF.ViewModels
 
         public BundleListViewModel(SecretaryAppDbContextFactory _context)
         {
-            _employeeService = new EmployeeDataService(_context, new GenericDataService<Employee>(_context));
-            _worklabelDataService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
+            _bundleListViewDataService = new BundleListViewDataService(new SecretaryAppDbContextFactory());
+            
             AddWorkLabelToEmployeeCommand = new AddWorkLabelToEmployeeCommand(this);
+            RemoveWorkLabelInBundleListCommand = new RemoveWorkLabelInBundleListCommand(this);
             OpenManageEmployeeWorkLabelsViewCommand = new OpenManageEmployeeWorkLabelsViewCommand(this);
             LoadData();
         }
 
         public async void LoadData()
         {
-            IEnumerable<Employee> entities = await _employeeService.GetAll();
+            IEnumerable<Employee> entities = await _bundleListViewDataService.GetAllEmployees();
             Employees = new ObservableCollection<Employee>(entities);
 
-            IEnumerable<WorkLabel> workLabels = await _worklabelDataService.GetAll();
+            IEnumerable<WorkLabel> workLabels = await _bundleListViewDataService.GetAllWorkLabels();
             WorkLabels = new ObservableCollection<WorkLabel>(workLabels.Where(w => w.Employee == null));
         }
 
-        public void SelectedWorkLabelToEmployee(WorkLabel label)
+        public async void SelectedWorkLabelToEmployee(WorkLabel label)
         {
             if(SelectedEmployee != null)
             {
                 label.Employee = SelectedEmployee;
 
-                _worklabelDataService.Update(label.Id, label);
 
+                await _bundleListViewDataService.Update<WorkLabel>(label.Id, label);
 
                 WorkLabels.Remove(label);
                 Employees.Remove(SelectedEmployee);
@@ -96,9 +94,15 @@ namespace SecretaryApp.WPF.ViewModels
             }
         }
 
+        public async void RemoveWorkLabel(WorkLabel workLabel)
+        {
+            WorkLabels.Remove(workLabel); 
+           await _bundleListViewDataService.Delete<WorkLabel>(workLabel.Id);
+        }
+
         public void OpenEmployeeManageWorkLabel(Employee employee)
         {
-            EmployeeManageWorkLabels employeeManageWorkLabels = new EmployeeManageWorkLabels(employee, _worklabelDataService, _employeeService, WorkLabels);
+            EmployeeManageWorkLabels employeeManageWorkLabels = new EmployeeManageWorkLabels(employee, _bundleListViewDataService, WorkLabels);
             employeeManageWorkLabels.Show();
         }
     }

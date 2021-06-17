@@ -7,7 +7,12 @@
         
         xmlns:controls="clr-namespace:SecretaryApp.WPF.Controls"
         mc:Ignorable="d"
-        Title="Secretary App" Height="450" Width="800">
+        Title="Secretary App" Height="450" Width="800"
+        
+        >
+    
+    
+    <Border CornerRadius="20">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -21,4 +26,5 @@
         <ContentControl Grid.Row="1" Content="{Binding Navigator.CurrentViewModel}"/>
 
     </Grid>
+    </Border>
 </Window>
