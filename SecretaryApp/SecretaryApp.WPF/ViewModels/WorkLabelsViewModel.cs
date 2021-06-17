@@ -50,13 +50,13 @@ namespace SecretaryApp.WPF.ViewModels
         public void AddNewWorkLabelWindow()
         {
             AddWorkLabelView workLabelsView = new AddWorkLabelView(WorkLabels, _workLabelService);
-            workLabelsView.Show();
+            workLabelsView.ShowDialog();
         }
 
         public void OpenWorkLabelDetail(WorkLabel parameter)
         {
             WorkLabelDetailView workLabelDetailView = new WorkLabelDetailView(parameter, _workLabelService, WorkLabels);
-            workLabelDetailView.Show();
+            workLabelDetailView.ShowDialog();
         }
     }
 }

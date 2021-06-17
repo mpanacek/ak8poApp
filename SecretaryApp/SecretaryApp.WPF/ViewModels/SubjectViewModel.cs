@@ -64,7 +64,7 @@ namespace SecretaryApp.WPF.ViewModels
 
             addNewSubjectView.Height = 450;
             addNewSubjectView.Width = 850;
-            addNewSubjectView.Show();
+            addNewSubjectView.ShowDialog();
         }
 
         public void OpenSubjectDetail(Subject subject)
@@ -73,7 +73,7 @@ namespace SecretaryApp.WPF.ViewModels
 
             subjectDetailView.Height = 450;
             subjectDetailView.Width = 850;
-            subjectDetailView.Show();
+            subjectDetailView.ShowDialog();
         }
     }
 }

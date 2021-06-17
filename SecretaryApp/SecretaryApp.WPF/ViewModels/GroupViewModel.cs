@@ -33,7 +33,7 @@ namespace SecretaryApp.WPF.ViewModels
         internal void OpenEditView(Group parameter)
         {
             EditGroupView editGroupView = new EditGroupView(_groupService, new SecretaryAppDbContextFactory(), parameter);
-            editGroupView.Show();
+            editGroupView.ShowDialog();
         }
 
         public GroupViewModel(SecretaryAppDbContextFactory _context)
@@ -59,7 +59,7 @@ namespace SecretaryApp.WPF.ViewModels
 
             addNewGroupView.Height = 450;
             addNewGroupView.Width = 850;
-            addNewGroupView.Show();
+            addNewGroupView.ShowDialog();
         }
 
         public void OpenGroupDetail(Group group)
@@ -68,7 +68,7 @@ namespace SecretaryApp.WPF.ViewModels
 
             groupDetailView.Height = 450;
             groupDetailView.Width = 850;
-            groupDetailView.Show();
+            groupDetailView.ShowDialog();
         }
     }
 }

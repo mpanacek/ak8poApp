@@ -61,7 +61,7 @@ namespace SecretaryApp.WPF.ViewModels
 
             addNewEmployee.Height = 450;
             addNewEmployee.Width = 850;
-            addNewEmployee.Show();
+            addNewEmployee.ShowDialog();
         }
 
         public void OpenEmployeeDetail(Employee employee)
@@ -70,7 +70,7 @@ namespace SecretaryApp.WPF.ViewModels
 
             employeeDetail.Height = 450;
             employeeDetail.Width = 850;
-            employeeDetail.Show();
+            employeeDetail.ShowDialog();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace SecretaryApp.WPF.Views.Subjects
         {
             DataContext = this;
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _subjectService = dataService;
             SubjectToDisplay = subject;
 
@@ -80,7 +80,7 @@ namespace SecretaryApp.WPF.Views.Subjects
         {
             AddGroupToSubjectView addGroupToSubjectView = new AddGroupToSubjectView(_subjectService, SubjectToDisplay, GroupsAssignedToSubject);
 
-            addGroupToSubjectView.Show();
+            addGroupToSubjectView.ShowDialog();
         }
     }
 }

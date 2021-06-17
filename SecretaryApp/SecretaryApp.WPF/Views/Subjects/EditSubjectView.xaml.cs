@@ -1,8 +1,5 @@
 ﻿using SecretaryApp.Domain.Models;
 using SecretaryApp.Domain.Services;
-using SecretaryApp.EntityFramework;
-using SecretaryApp.EntityFramework.Services;
-using SecretaryApp.WPF.Commands.Subjects;
 using SecretaryApp.WPF.Logic;
 using System;
 using System.Linq;
@@ -22,7 +19,7 @@ namespace SecretaryApp.WPF.Views.Subjects
         {
             DataContext = this;
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _subjectService = dataService;
 
             SubjectToEdit = subject;

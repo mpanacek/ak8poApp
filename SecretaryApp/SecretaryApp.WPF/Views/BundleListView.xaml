@@ -6,40 +6,35 @@
              xmlns:local="clr-namespace:SecretaryApp.WPF.Views"
              mc:Ignorable="d" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="800">
     <Grid>
+
         <!--<Grid.Resources>
             <Style TargetType="RadioButton" BasedOn="{StaticResource WorkLabel}"/>
         </Grid.Resources>-->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-            <ItemsControl x:Name="WorkLabelList" Grid.Row="0" ItemsSource="{Binding WorkLabels}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
-                                <StackPanel Orientation="Vertical">
+        <Label Grid.Row="0" Content="Pracovné Štítky" FontSize="16" FontWeight="Bold" FontFamily="Book Antiqua" FontStyle="Italic"/>
+
+        <ItemsControl x:Name="WorkLabelList" Grid.Row="1" ItemsSource="{Binding WorkLabels}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="10">
+                            <StackPanel Orientation="Vertical">
                                 <TextBlock  Text="{Binding Name, StringFormat='Názov: {0}'}" />
                                 <TextBlock  Text="{Binding NumberOfPoints, StringFormat='Počet bodov: {0}'}">
-                                   
-                                    <!--<ContentControl>
-                                        <Style TargetType="TextBlock">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding NumberOfPoints}" Value="30">
-                                                    <Setter Property="Background" Value="Red"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>        
-                                        </Style>
-                                    </ContentControl>-->
                                 </TextBlock>
                                 <TextBlock x:Name="numberOfStudents" Text="{Binding NumberOfStudents, StringFormat='Počet študentov: {0}'}">
                                     <TextBlock.Style>
@@ -52,65 +47,39 @@
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
-                              
+
                                 <ComboBox ItemsSource="{Binding DataContext.Employees, ElementName=WorkLabelList}" DisplayMemberPath="FullName" SelectedItem="{Binding DataContext.SelectedEmployee, ElementName=WorkLabelList}"/>
                                 <Button Content="Priraď" Command="{Binding DataContext.AddWorkLabelToEmployeeCommand, ElementName=WorkLabelList}" CommandParameter="{Binding}"/>
                                 <Button Content="Odstráň" Command="{Binding DataContext.RemoveWorkLabelInBundleListCommand, ElementName=WorkLabelList}" CommandParameter="{Binding}" x:Name="deleteBtn"/>
-                                <!-- <Button.Style>
-                                        <Style TargetType="Button">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding NumberOfStudents}" Value="0">
-                                                    <Setter Property="Visibility"  Value="Visible"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding NumberOfStudents}" Value="">
-                                                    <Setter Property="Visibility"  Value="Hidden"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>-->
                             </StackPanel>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Label Grid.Row="0" Content="Pracovné Štítky" FontSize="16" FontWeight="Bold" FontFamily="Book Antiqua" FontStyle="Italic"/>
+        <Label Grid.Row="2" Content="Zamestnanci" FontSize="16" FontWeight="Bold" FontFamily="Book Antiqua" FontStyle="Italic"/>
 
-        <ListView x:Name="ListView" Grid.Row="1" Focusable="False">
-            <!--<ListView.ItemContainerStyle>
-            --><!--<Style>
-                <Style.Triggers>
-                        <Trigger Property="Control.FocusVisualStyle" Value="Transparent">
-                        <Setter Property="Control.Background" Value="Transparent" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>--><!--
-            </ListView.ItemContainerStyle>-->
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding Employees}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="260"/>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+        <!--<Label x:Name="dataLabel" Gr--><!--id.Row="2" Content="Žiadne Dáta" FontSize="20" FontFamily="Book Antiqua" FontStyle="Italic" HorizontalAlignment="Center" IsEnabled="False"/>-->
 
-                            <TextBlock  Text="{Binding FullName}" />
-                            <TextBlock Grid.Column="1" Text="{Binding WorkEmail}" />
-                            <TextBlock Grid.Column="2" Text="{Binding WorkPoints}" />
-                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenManageEmployeeWorkLabelsViewCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+        <ListView x:Name="ListView" Grid.Row="3" ItemsSource="{Binding Employees}">
 
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Header="Meno a Priezvisko" Width="180" DisplayMemberBinding="{Binding FullName}"/>
+                    <GridViewColumn Header="Pracovný Email" Width="260" DisplayMemberBinding="{Binding WorkEmail}"/>
+                    <GridViewColumn Header="Pracovné Body" Width="180" DisplayMemberBinding="{Binding WorkPoints}"/>
+                    <GridViewColumn Width="auto">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Grid.Column="3"  Content="Detaily" Command="{Binding DataContext.OpenManageEmployeeWorkLabelsViewCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
+
+
 </UserControl>

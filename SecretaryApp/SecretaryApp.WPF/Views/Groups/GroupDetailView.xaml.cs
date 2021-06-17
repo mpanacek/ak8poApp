@@ -24,7 +24,7 @@ namespace SecretaryApp.WPF.Views.Groups
             _groupService = dataService;
             GroupToDisplay = group;
             Groups = groups;
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             headingDataLabel.Content = GroupToDisplay.Name;
             shortcutDataLabel.Content = GroupToDisplay.Shortcut;
             nameDataLabel.Content = GroupToDisplay.Name;

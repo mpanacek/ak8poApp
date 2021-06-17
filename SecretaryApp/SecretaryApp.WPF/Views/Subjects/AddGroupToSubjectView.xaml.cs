@@ -53,6 +53,7 @@ namespace SecretaryApp.WPF.Views.Subjects
             DataContext = this;
             AddGroupTosubjectCommand = new AddGroupTosubjectCommand(this);
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             SubjectGroups = subjectGroups;
             CurrentSubject = subject;
             var _context = new SecretaryAppDbContextFactory();

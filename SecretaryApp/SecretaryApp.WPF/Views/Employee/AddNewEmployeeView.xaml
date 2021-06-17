@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:viewModels="clr-namespace:SecretaryApp.WPF.ViewModels"
              xmlns:c="clr-namespace:SecretaryApp.WPF.Commands"
+        xmlns:v="clr-namespace:SecretaryApp.WPF.Views.Validation"
              xmlns:controls="clr-namespace:SecretaryApp.WPF.Controls"
              xmlns:local="clr-namespace:SecretaryApp.WPF.Views"
         xmlns:validation="clr-namespace:SecretaryApp.WPF.Views.Validation"
@@ -42,6 +43,15 @@
         <Label Content="Doktorant" HorizontalAlignment="Left" Margin="354,101,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="doktorantCheckBox" HorizontalAlignment="Left" Margin="505,106,0,0" VerticalAlignment="Top"/>
         <Label Content="Úväzok" HorizontalAlignment="Left" Margin="354,138,0,0" VerticalAlignment="Top"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="workingTimeTextBox" HorizontalAlignment="Left" Margin="505,142,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="workingTimeTextBox" HorizontalAlignment="Left" Margin="505,142,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120">
+            <TextBox.Text>
+                <Binding Path="Text">
+                    <Binding.ValidationRules>
+                        <v:MinMaxValidation Min="0" Max="100"/>
+                    </Binding.ValidationRules>
+                </Binding>
+ 
+            </TextBox.Text>
+        </TextBox>
     </Grid>
 </Window>

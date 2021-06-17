@@ -23,6 +23,7 @@ namespace SecretaryApp.WPF
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
     }
 }

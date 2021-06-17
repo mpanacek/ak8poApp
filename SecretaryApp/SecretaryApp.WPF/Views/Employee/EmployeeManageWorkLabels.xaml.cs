@@ -80,7 +80,7 @@ namespace SecretaryApp.WPF.Views.Employee
             ObservableCollection<WorkLabel> unassignedWorkLabels)
         {
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             DataContext = this;
 
             _bundleListViewDataService = dataService;

@@ -12,35 +12,25 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ListView" Grid.Row="0">
-            <ItemsControl ItemsSource="{Binding Groups}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="260"/>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0"  Text="{Binding Name}" />
-                            <TextBlock Grid.Column="1" Text="{Binding Class}" />
-                            <TextBlock Grid.Column="2" Text="{Binding NumberOfStudents}" />
-                            <TextBlock Grid.Column="3" Text="{Binding Semester}" />
-                            <Button x:Name="addgroupButton" Grid.Column="4" Content="Add" Command="{Binding DataContext.AddGroupTosubjectCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+
+        <ListView x:Name="ListView" Grid.Row="0" ItemsSource="{Binding Groups}">
+
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Header="Názov" Width="180" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Ročník" Width="150" DisplayMemberBinding="{Binding Class}"/>
+                    <GridViewColumn Header="Počet Študentov" Width="150" DisplayMemberBinding="{Binding NumberOfStudents}"/>
+                    <GridViewColumn Header="Semester" Width="150" DisplayMemberBinding="{Binding Semester}"/>
+                    <GridViewColumn Width="90">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="addgroupButton" Grid.Column="4" Content="Pridaj" Command="{Binding DataContext.AddGroupTosubjectCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
-
-        <!--<Button x:Name="addGroupButton" Grid.Row="1" Click="addGroupButton_Click"/>-->
     </Grid>
 </Window>

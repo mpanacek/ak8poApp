@@ -38,11 +38,12 @@ namespace SecretaryApp.WPF.Views
             _employeeService = dataService;
             Employees = employees;
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         }
 
-        private string text;
+        private int text;
 
-        public string Text
+        public int Text
         {
             get { return text; }
             set { text = value; }
@@ -59,7 +60,7 @@ namespace SecretaryApp.WPF.Views
         {
             Domain.Models.Employee employee = new Domain.Models.Employee();
 
-            if(nameTextBox.Text != "" && surnameTextBox.Text != "" && workingTimeTextBox.Text != "" && workMailTextBox.Text != ""
+            if(nameTextBox.Text != "" && surnameTextBox.Text != "" && workingTimeTextBox.Text != "" && int.Parse(workingTimeTextBox.Text) > 0 && int.Parse(workingTimeTextBox.Text) <= 100  && workMailTextBox.Text != ""
                 && privateMailTextBox.Text != "" && privatePhoneTextBox.Text != "" && workPhoneTextBox.Text != "")
             {
                 employee.Name = nameTextBox.Text.ToString();

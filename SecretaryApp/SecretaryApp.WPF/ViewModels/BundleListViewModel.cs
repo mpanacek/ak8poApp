@@ -103,7 +103,7 @@ namespace SecretaryApp.WPF.ViewModels
         public void OpenEmployeeManageWorkLabel(Employee employee)
         {
             EmployeeManageWorkLabels employeeManageWorkLabels = new EmployeeManageWorkLabels(employee, _bundleListViewDataService, WorkLabels);
-            employeeManageWorkLabels.Show();
+            employeeManageWorkLabels.ShowDialog();
         }
     }
 }

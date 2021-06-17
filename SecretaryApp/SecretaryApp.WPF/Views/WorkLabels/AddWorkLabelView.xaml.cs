@@ -3,7 +3,9 @@ using SecretaryApp.Domain.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace SecretaryApp.WPF.Views.WorkLabels
 {
@@ -19,6 +21,7 @@ namespace SecretaryApp.WPF.Views.WorkLabels
         public AddWorkLabelView(ObservableCollection<WorkLabel> workLabels, IDataService<WorkLabel> service)
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             WorkLabels = workLabels;
             _workLabelService = service;
@@ -43,6 +46,12 @@ namespace SecretaryApp.WPF.Views.WorkLabels
 
                 Close();
             }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

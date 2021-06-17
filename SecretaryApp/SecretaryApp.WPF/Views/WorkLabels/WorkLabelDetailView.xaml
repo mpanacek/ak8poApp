@@ -19,7 +19,7 @@
         <Label Content="Zodpovedný zamestnanec" HorizontalAlignment="Left" Margin="24,232,0,0" VerticalAlignment="Top"/>
         <Label x:Name="responsibleEmployeeDataLabel" HorizontalAlignment="Left" Margin="200,232,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Predmet" HorizontalAlignment="Left" Margin="24,272,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="SubjectDataLabelDataLabel" HorizontalAlignment="Left" Margin="140,276,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="SubjectDataLabelDataLabel" HorizontalAlignment="Left" Margin="140,272,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Jazyk" HorizontalAlignment="Left" Margin="354,142,0,0" VerticalAlignment="Top"/>
         <Label x:Name="languageDataLabel" HorizontalAlignment="Left" Margin="505,146,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Pracovné body" HorizontalAlignment="Left" Margin="354,187,0,0" VerticalAlignment="Top"/>

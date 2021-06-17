@@ -13,37 +13,34 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="ListView" Grid.Row="1">
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding Groups}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="260"/>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="180"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+        <ListView x:Name="ListView" Grid.Row="1" ItemsSource="{Binding Groups}">
 
-                            <TextBlock  Text="{Binding Name}" />
-                            <TextBlock Grid.Column="1" Text="{Binding Language}" />
-                            <TextBlock Grid.Column="2" Text="{Binding StudyForm}" />
-                            <Button Grid.Column="3"  Content="Details" Command="{Binding DataContext.OpenGroupDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
-                            <Button Grid.Column="4"  Content="Edit" Command="{Binding DataContext.OpenGroupViewEditCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
 
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ListView.View >
+                <GridView>
+                    <GridViewColumn Header="Názov" Width="180" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Jazyk" Width="200" DisplayMemberBinding="{Binding Language}"/>
+                    <GridViewColumn Header="Forma Štúdia" Width="180" DisplayMemberBinding="{Binding StudyForm}"/>
+                    <GridViewColumn Width="90">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Grid.Column="3"  Content="Detaily" Command="{Binding DataContext.OpenGroupDetailCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="90">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Grid.Column="4"  Content="Uprav" Command="{Binding DataContext.OpenGroupViewEditCommand, ElementName=ListView}" CommandParameter="{Binding}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
         </ListView>
 
-        <Button Grid.Row="2" Content="Add Group" Command="{Binding AddGroupCommand}"/>
+        <Button Grid.Row="2" Content="Pridaj Skupinu" Command="{Binding AddGroupCommand}"/>
 
     </Grid>
 </UserControl>

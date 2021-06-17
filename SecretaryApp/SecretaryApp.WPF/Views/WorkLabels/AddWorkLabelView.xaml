@@ -14,11 +14,11 @@
         <Label Content="Názov" HorizontalAlignment="Left" Margin="24,101,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="140,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Počet študentov" HorizontalAlignment="Left" Margin="24,142,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="numberOfStudentsTextBox" HorizontalAlignment="Left" Margin="140,146,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="numberOfStudentsTextBox" HorizontalAlignment="Left" Margin="140,146,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Počet hodín" HorizontalAlignment="Left" Margin="24,187,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="numberOfHoursTextBox" HorizontalAlignment="Left" Margin="140,191,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="numberOfHoursTextBox" HorizontalAlignment="Left" Margin="140,191,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Počet týždňov" HorizontalAlignment="Left" Margin="24,230,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="numberOfWeeksTextBox"  HorizontalAlignment="Left" Margin="140,234,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="numberOfWeeksTextBox"  HorizontalAlignment="Left" Margin="140,234,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Jazyk" HorizontalAlignment="Left" Margin="24,291,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="languageComboBox" Margin="140,291,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
     </Grid>

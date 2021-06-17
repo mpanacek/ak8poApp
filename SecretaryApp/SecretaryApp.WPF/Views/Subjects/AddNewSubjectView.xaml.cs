@@ -5,7 +5,9 @@ using SecretaryApp.EntityFramework.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Input;
 
 namespace SecretaryApp.WPF.Views.Subjects
 {
@@ -20,7 +22,7 @@ namespace SecretaryApp.WPF.Views.Subjects
         public AddNewSubjectView(IDataService<Subject> dataService, ObservableCollection<Subject> subjects)
         {
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             endingComboBox.ItemsSource = Enum.GetValues(typeof(WayOfCompletion)).Cast<WayOfCompletion>();
             languageComboBox.ItemsSource = Enum.GetValues(typeof(Language)).Cast<Language>();
 
@@ -28,6 +30,11 @@ namespace SecretaryApp.WPF.Views.Subjects
             _subjectService = dataService;
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
             Subject subject = new Subject();

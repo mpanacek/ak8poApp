@@ -20,7 +20,7 @@ namespace SecretaryApp.WPF.Views.Groups
         public AddNewGroupView(IDataService<Group> dataService, ObservableCollection<Group> groups)
         {
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             semesterComboBox.ItemsSource = Enum.GetValues(typeof(Semester)).Cast<Semester>();
             studyFormComboBox.ItemsSource = Enum.GetValues(typeof(StudyForm)).Cast<StudyForm>();
             studyTypeComboBox.ItemsSource = Enum.GetValues(typeof(StudyType)).Cast<StudyType>();

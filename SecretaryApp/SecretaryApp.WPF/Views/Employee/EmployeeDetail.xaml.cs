@@ -33,7 +33,7 @@ namespace SecretaryApp.WPF.Views.Employee
         public EmployeeDetail(Domain.Models.Employee employee, IDataService<Domain.Models.Employee> dataService, ObservableCollection<Domain.Models.Employee> employees)
         {
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             EmployeeToDisplay = employee;
 

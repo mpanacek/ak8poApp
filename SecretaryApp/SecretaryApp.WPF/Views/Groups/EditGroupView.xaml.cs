@@ -32,7 +32,7 @@ namespace SecretaryApp.WPF.Views.Groups
         public EditGroupView(IDataService<Group> dataService, SecretaryAppDbContextFactory _context, Group group)
         {
             InitializeComponent();
-
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             _groupService = dataService;
             _workLabelService = new WorkLabelDataService(_context, new GenericDataService<WorkLabel>(_context));
 

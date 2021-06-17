@@ -33,6 +33,7 @@ namespace SecretaryApp.EntityFramework.Services
             {
                 Subject entity = await context.Set<Subject>()
                     .Include(s => s.Groups)
+                    .Include(s => s.WorkLabels)
                     .FirstOrDefaultAsync((e) => e.Id == id);
                 return entity;
             }
@@ -44,6 +45,7 @@ namespace SecretaryApp.EntityFramework.Services
             {
                 IEnumerable<Subject> entities = await context.Set<Subject>()
                     .Include(s => s.Groups)
+                    .Include(s => s.WorkLabels)
                     .ToListAsync();
 
                 return entities;
